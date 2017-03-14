@@ -22,7 +22,7 @@ C:\Users\%USERNAME%\AppData\Roaming\McNeel\Rhinoceros\5.0\scripts\butterfly
 
 ghenv.Component.Name = "Butterfly"
 ghenv.Component.NickName = "BF::BF"
-ghenv.Component.Message = 'VER 0.0.03\nOCT_31_2016'
+ghenv.Component.Message = 'VER 0.0.03\nMAR_13_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -41,62 +41,69 @@ def installButterfly(update):
     This code will download butterfly library from github to:
         C:\Users\%USERNAME%\AppData\Roaming\McNeel\Rhinoceros\5.0\scripts\butterfly
     """
-    url = "https://github.com/mostaphaRoudsari/butterfly/archive/master.zip"
+    urls = ("https://github.com/ladybug-tools/butterfly/archive/master.zip",
+            "https://github.com/ladybug-tools/butterfly-plus/archive/master.zip")
+    folders = ('butterfly', 'butterfly-plus')
+    libs = ('butterfly', 'butterfly_grasshopper')
+
     targetDirectory = [p for p in sys.path if p.find('scripts')!= -1][0]
     
-    for f in ('butterfly', 'butterfly_grasshopper'):
+    for f in folders:
         libFolder = os.path.join(targetDirectory, f)
         if not update and os.path.isdir(libFolder):
             return
         elif update and os.path.isdir(libFolder):
             shutil.rmtree(libFolder)
     
-    # download the zip file
-    print "Downloading the github repository to {}".format(targetDirectory)
-    zipFile = os.path.join(targetDirectory, os.path.basename(url))
+    for count, (folder, url) in enumerate(zip(folders, urls)):
+        # download the zip file
+        lib = libs[count]
+        print "Downloading {} repository to {}".format(folder, targetDirectory)
+        zipFile = os.path.join(targetDirectory, '%s.zip' % folder)
 
-    try:
-        client = System.Net.WebClient()
-        client.DownloadFile(url, zipFile)
-    except Exception, e:
-        msg = `e` + "\nDownload failed! Try to download and unzip the file manually form:\n" + url
-        raise Exception(msg)
-        
-    #unzip the file
-    with zipfile.ZipFile(zipFile) as zf:
-        for f in zf.namelist():
-            if f.endswith('/'):
-                try: os.makedirs(f)
-                except: pass
-            else:
-                zf.extract(f, targetDirectory)
-    zf.close()
-    
-    for f in ('butterfly', 'butterfly_grasshopper'):
-        bfFolder = os.path.join(targetDirectory, r"butterfly-master", f)
-        libFolder = os.path.join(targetDirectory, f)
-        print 'Copying butterfly source code to {}'.format(libFolder)
-        shutil.copytree(bfFolder, libFolder)
-    
-    uofolder = UserObjectFolders[0]
-    bfUserObjectsFolder = os.path.join(targetDirectory, r"butterfly-master\plugin\grasshopper\userObjects")
-    print 'Copying butterfly userobjects to {}.'.format(uofolder)
-    
-    # remove all the butterfly userobjects
-    for f in os.listdir(uofolder):
-        if f.startswith("Butterfly"):
-            os.remove(os.path.join(uofolder, f))
+        try:
+            client = System.Net.WebClient()
+            client.DownloadFile(url, zipFile)
+        except Exception, e:
+            msg = `e` + "\nDownload failed! Try to download and unzip the file manually form:\n" + url
+            raise Exception(msg)
             
-    for f in os.listdir(bfUserObjectsFolder):
-        shutil.copyfile(os.path.join(bfUserObjectsFolder, f),
-                        os.path.join(uofolder, f))
-
-    # try to clean up
-    try:
-        shutil.rmtree(os.path.join(targetDirectory, 'butterfly-master'))
-        os.remove(zipFile)
-    except:
-        pass
+        #unzip the file
+        with zipfile.ZipFile(zipFile) as zf:
+            for f in zf.namelist():
+                if f.endswith('/'):
+                    try: os.makedirs(f)
+                    except: pass
+                else:
+                    zf.extract(f, targetDirectory)
+        zf.close()
+        
+        bfFolder = os.path.join(targetDirectory, r"{}-master".format(folder), lib)
+        libFolder = os.path.join(targetDirectory, lib)
+        print 'Copying butterfly source code from {} to {}'.format(bfFolder, libFolder)
+        shutil.copytree(bfFolder, libFolder)
+        
+        if count == 1:
+            # copy userobjects
+            uofolder = UserObjectFolders[0]
+            bfUserObjectsFolder = os.path.join(targetDirectory, r"butterfly-plus-master\plugin\grasshopper\userObjects")
+            print 'Copying butterfly userobjects to {}.'.format(uofolder)
+            
+            # remove all the butterfly userobjects
+            for f in os.listdir(uofolder):
+                if f.startswith("Butterfly"):
+                    os.remove(os.path.join(uofolder, f))
+                    
+            for f in os.listdir(bfUserObjectsFolder):
+                shutil.copyfile(os.path.join(bfUserObjectsFolder, f),
+                                os.path.join(uofolder, f))
+    
+        # try to clean up
+        try:
+            shutil.rmtree(os.path.join(targetDirectory, r"{}-master".format(folder)))
+            os.unlink(zipFile)
+        except:
+            pass
 
 
 if not butterflyFolder_:
