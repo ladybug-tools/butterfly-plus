@@ -5,11 +5,7 @@ make2dParams = None
 try:
     from butterfly.make2dparameters import Make2dParameters
 except ImportError as e:
-    msg = '\nFailed to import butterfly. Did you install butterfly on your machine?' + \
-            '\nYou can download butterfly from package manager.' + \
-            '\nOpen an issue on github if you think this is a bug:' + \
-            ' https://github.com/ladybug-analysis-tools/butterfly/issues'
-        
+    msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
 # create blockMeshDict based on BBox
@@ -22,6 +18,7 @@ if _origin and _normal:
             (_origin.X, _origin.Y, _origin.Z),
             (_normal.X, _normal.Y, _normal.Z),
             _width_)
+
 
 
 

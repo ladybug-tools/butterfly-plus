@@ -19,7 +19,7 @@ Create an inlet boundary with uniform velocity value.
 """
 
 ghenv.Component.Name = "Butterfly_Inlet Boundary"
-ghenv.Component.NickName = "inlet"
+ghenv.Component.NickName = "inletvel"
 ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "01::Boundary"

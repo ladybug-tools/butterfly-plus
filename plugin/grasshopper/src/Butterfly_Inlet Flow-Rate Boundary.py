@@ -19,7 +19,7 @@ Create an inlet boundary with flow rate in m3/s.
 """
 
 ghenv.Component.Name = "Butterfly_Inlet Flow-Rate Boundary"
-ghenv.Component.NickName = "inlet"
+ghenv.Component.NickName = "inletVol"
 ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "01::Boundary"

@@ -7,11 +7,7 @@ try:
     from butterfly.parser import CppDictParser
     from butterfly.utilities import updateDict
 except ImportError as e:
-    msg = '\nFailed to import butterfly. Did you install butterfly on your machine?' + \
-            '\nYou can download butterfly from package manager.' + \
-            '\nOpen an issue on github if you think this is a bug:' + \
-            ' https://github.com/ladybug-analysis-tools/butterfly/issues'
-        
+    msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
 if _meshQuality_:
@@ -42,6 +38,7 @@ if additionalParameters_:
         values = updateDict(values, addedValues)
 
 snappyHexMeshDict = SolutionParameter('snappyHexMeshDict', values)
+
 
 
 # assign outputs to OUT

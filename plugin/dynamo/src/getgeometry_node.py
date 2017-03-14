@@ -5,11 +5,7 @@ geometries = None
 try:
     from butterfly_dynamo.geometry import BFMeshToMesh
 except ImportError as e:
-    msg = '\nFailed to import butterfly. Did you install butterfly on your machine?' + \
-            '\nYou can download butterfly from package manager.' + \
-            '\nOpen an issue on github if you think this is a bug:' + \
-            ' https://github.com/ladybug-analysis-tools/butterfly/issues'
-        
+    msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 else:
     from itertools import chain
@@ -39,6 +35,7 @@ if _BFObjects:
             col = (colors_[c % l] for c, g in enumerate(geo))
 
         geometries = (BFMeshToMesh(g, c) for g, c in zip(geo, col))
+
 
 
 # assign outputs to OUT
