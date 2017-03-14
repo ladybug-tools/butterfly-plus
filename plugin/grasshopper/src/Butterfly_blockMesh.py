@@ -26,7 +26,7 @@ blockMesh
 
 ghenv.Component.Name = "Butterfly_blockMesh"
 ghenv.Component.NickName = "blockMesh"
-ghenv.Component.Message = 'VER 0.0.03\nFEB_22_2017'
+ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"

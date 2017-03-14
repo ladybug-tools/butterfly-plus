@@ -25,7 +25,7 @@ Create Butterfly surface.
 
 ghenv.Component.Name = "Butterfly_Create Butterfly Geometry"
 ghenv.Component.NickName = "createBFGeometry"
-ghenv.Component.Message = 'VER 0.0.03\nFEB_10_2017'
+ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -33,12 +33,7 @@ ghenv.Component.AdditionalHelpFromDocStrings = "2"
 try:
     from butterfly_grasshopper.geometry import BFGeometryGH
 except ImportError as e:
-    msg = '\nFailed to import butterfly. Did you install butterfly on your machine?' + \
-            '\nYou can download the installer file from github: ' + \
-            'https://github.com/mostaphaRoudsari/Butterfly/tree/master/plugin/grasshopper/samplefiles' + \
-            '\nOpen an issue on github if you think this is a bug:' + \
-            ' https://github.com/mostaphaRoudsari/Butterfly/issues'
-        
+    msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
 if _geo and _name:

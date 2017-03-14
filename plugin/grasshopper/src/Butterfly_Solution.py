@@ -32,7 +32,7 @@ Run recipes using OpenFOAM.
 
 ghenv.Component.Name = "Butterfly_Solution"
 ghenv.Component.NickName = "solution"
-ghenv.Component.Message = 'VER 0.0.03\nFEB_05_2017'
+ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "06::Solution"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -44,12 +44,7 @@ try:
     from butterfly_grasshopper.timer import ghComponentTimer
     from butterfly.solution import Solution
 except ImportError as e:
-    msg = '\nFailed to import butterfly. Did you install butterfly on your machine?' + \
-            '\nYou can download the installer file from github: ' + \
-            'https://github.com/mostaphaRoudsari/Butterfly/tree/master/plugin/grasshopper/samplefiles' + \
-            '\nOpen an issue on github if you think this is a bug:' + \
-            ' https://github.com/mostaphaRoudsari/Butterfly/issues'
-        
+    msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
 uniqueKey = str(ghenv.Component.InstanceGuid)

@@ -19,7 +19,7 @@ Set residual control convergance values
 
 ghenv.Component.Name = "Butterfly_residualControl"
 ghenv.Component.NickName = "residualControl"
-ghenv.Component.Message = 'VER 0.0.03\nFEB_21_2017'
+ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "05::Recipe"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -27,12 +27,7 @@ ghenv.Component.AdditionalHelpFromDocStrings = "2"
 try:
     from butterfly.fvSolution import ResidualControl
 except ImportError as e:
-    msg = '\nFailed to import butterfly. Did you install butterfly on your machine?' + \
-            '\nYou can download the installer file from github: ' + \
-            'https://github.com/mostaphaRoudsari/Butterfly/tree/master/plugin/grasshopper/samplefiles' + \
-            '\nOpen an issue on github if you think this is a bug:' + \
-            ' https://github.com/mostaphaRoudsari/Butterfly/issues'
-        
+    msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
 if _quantities:
@@ -47,3 +42,4 @@ if _quantities:
     residualControl = ResidualControl(
         {key: value for (key, value) in zip(_quantities, values)}
     )
+

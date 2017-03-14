@@ -21,7 +21,7 @@ Solution Parameter.
 """
 ghenv.Component.Name = "Butterfly_Solution Parameter"
 ghenv.Component.NickName = "solutionParam"
-ghenv.Component.Message = 'VER 0.0.03\nOCT_30_2016'
+ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "06::Solution"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -29,12 +29,7 @@ ghenv.Component.AdditionalHelpFromDocStrings = "2"
 try:
     from butterfly.solution import SolutionParameter
 except ImportError as e:
-    msg = '\nFailed to import butterfly. Did you install butterfly on your machine?' + \
-            '\nYou can download the installer file from github: ' + \
-            'https://github.com/mostaphaRoudsari/Butterfly/tree/master/plugin/grasshopper/samplefiles' + \
-            '\nOpen an issue on github if you think this is a bug:' + \
-            ' https://github.com/mostaphaRoudsari/Butterfly/issues'
-        
+    msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
 if _filename and _values:

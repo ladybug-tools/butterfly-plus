@@ -24,7 +24,7 @@ snappyHexMesh
 
 ghenv.Component.Name = "Butterfly_snappyHexMesh"
 ghenv.Component.NickName = "snappyHexMesh"
-ghenv.Component.Message = 'VER 0.0.03\nFEB_09_2017'
+ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -33,12 +33,7 @@ ghenv.Component.AdditionalHelpFromDocStrings = "1"
 try:
     from butterfly.surfaceFeatureExtractDict import SurfaceFeatureExtractDict
 except ImportError as e:
-    msg = '\nFailed to import butterfly. Did you install butterfly on your machine?' + \
-            '\nYou can download the installer file from github: ' + \
-            'https://github.com/mostaphaRoudsari/Butterfly/tree/master/plugin/grasshopper/samplefiles' + \
-            '\nOpen an issue on github if you think this is a bug:' + \
-            ' https://github.com/mostaphaRoudsari/Butterfly/issues'
-        
+    msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
 if _case and _run:

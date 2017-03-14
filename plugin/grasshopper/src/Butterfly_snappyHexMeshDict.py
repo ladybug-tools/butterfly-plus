@@ -34,7 +34,7 @@ Read more about snappyHexMeshDict here:
 
 ghenv.Component.Name = "Butterfly_snappyHexMeshDict"
 ghenv.Component.NickName = "snappyHexMeshDict"
-ghenv.Component.Message = 'VER 0.0.03\nFEB_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -44,12 +44,7 @@ try:
     from butterfly.parser import CppDictParser
     from butterfly.utilities import updateDict
 except ImportError as e:
-    msg = '\nFailed to import butterfly. Did you install butterfly on your machine?' + \
-            '\nYou can download the installer file from github: ' + \
-            'https://github.com/mostaphaRoudsari/Butterfly/tree/master/plugin/grasshopper/samplefiles' + \
-            '\nOpen an issue on github if you think this is a bug:' + \
-            ' https://github.com/mostaphaRoudsari/Butterfly/issues'
-        
+    msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
 if _meshQuality_:
@@ -80,3 +75,4 @@ if additionalParameters_:
         values = updateDict(values, addedValues)
 
 snappyHexMeshDict = SolutionParameter('snappyHexMeshDict', values)
+

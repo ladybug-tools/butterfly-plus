@@ -20,7 +20,7 @@ Wind vector.
 
 ghenv.Component.Name = "Butterfly_Wind Vector"
 ghenv.Component.NickName = "WindVector"
-ghenv.Component.Message = 'VER 0.0.03\nFEB_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"

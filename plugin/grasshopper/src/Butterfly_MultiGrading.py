@@ -22,7 +22,7 @@ Create a grading for multiple segmentGradings.
 
 ghenv.Component.Name = "Butterfly_MultiGrading"
 ghenv.Component.NickName = "multiGrading"
-ghenv.Component.Message = 'VER 0.0.03\nOCT_30_2016'
+ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
@@ -30,12 +30,7 @@ ghenv.Component.AdditionalHelpFromDocStrings = "3"
 try:
     from butterfly.grading import MultiGrading
 except ImportError as e:
-    msg = '\nFailed to import butterfly. Did you install butterfly on your machine?' + \
-            '\nYou can download the installer file from github: ' + \
-            'https://github.com/mostaphaRoudsari/Butterfly/tree/master/plugin/grasshopper/samplefiles' + \
-            '\nOpen an issue on github if you think this is a bug:' + \
-            ' https://github.com/mostaphaRoudsari/Butterfly/issues'
-        
+    msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
 if _segmentGradings:

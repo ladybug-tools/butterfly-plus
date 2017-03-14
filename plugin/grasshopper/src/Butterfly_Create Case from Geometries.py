@@ -33,7 +33,7 @@ Create an OpenFOAM Case from geometries.
 
 ghenv.Component.Name = "Butterfly_Create Case from Geometries"
 ghenv.Component.NickName = "caseFromGeos"
-ghenv.Component.Message = 'VER 0.0.03\nFEB_26_2017'
+ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -43,12 +43,7 @@ try:
     from butterfly_grasshopper.geometry import xyzToPoint
     import butterfly_grasshopper.unitconversion as uc
 except ImportError as e:
-    msg = '\nFailed to import butterfly. Did you install butterfly on your machine?' + \
-            '\nYou can download the installer file from food4Rhino!' + \
-            '\nOpen an issue on github if you think this is a bug:' + \
-            ' https://github.com/ladybug-analysis-tools/butterfly/issues'
-        
-    raise ImportError('{}\n{}'.format(msg, e))
+    msg = '\nFailed to import butterfly:'
 
 
 if _run and _name and _BFGeometries: 
@@ -76,3 +71,4 @@ if _run and _name and _BFGeometries:
     blockPts = (xyzToPoint(v) for v in case.blockMeshDict.vertices)
     
     case.save(overwrite=(_run + 1) % 2)
+

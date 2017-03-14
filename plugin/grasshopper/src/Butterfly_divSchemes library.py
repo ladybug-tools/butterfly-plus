@@ -24,7 +24,7 @@ Generate fvSchemes based on mesh non-orthogonalities.
 
 ghenv.Component.Name = "Butterfly_divSchemes library"
 ghenv.Component.NickName = "genDivSchemes"
-ghenv.Component.Message = 'VER 0.0.03\nFEB_08_2017'
+ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "08::Etc"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
@@ -32,13 +32,9 @@ ghenv.Component.AdditionalHelpFromDocStrings = "3"
 try:
     from butterfly.fvSchemes import FvSchemes
 except ImportError as e:
-    msg = '\nFailed to import butterfly. Did you install butterfly on your machine?' + \
-            '\nYou can download the installer file from github: ' + \
-            'https://github.com/mostaphaRoudsari/Butterfly/tree/master/plugin/grasshopper/samplefiles' + \
-            '\nOpen an issue on github if you think this is a bug:' + \
-            ' https://github.com/mostaphaRoudsari/Butterfly/issues'
-        
+    msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
 if _quality is not None:
     divSchemes = FvSchemes.divSchemesCollector[_quality%2]
+

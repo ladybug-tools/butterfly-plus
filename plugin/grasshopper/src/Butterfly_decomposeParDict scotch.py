@@ -19,7 +19,7 @@ Scotch decomposeParDict. Dictionary for parallel runs.
 
 ghenv.Component.Name = "Butterfly_decomposeParDict scotch"
 ghenv.Component.NickName = "decomposeParDict_scotch"
-ghenv.Component.Message = 'VER 0.0.03\nFEB_21_2017'
+ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "08::Etc"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -27,12 +27,7 @@ ghenv.Component.AdditionalHelpFromDocStrings = "2"
 try:
     from butterfly.decomposeParDict import DecomposeParDict
 except ImportError as e:
-    msg = '\nFailed to import butterfly. Did you install butterfly on your machine?' + \
-            '\nYou can download the installer file from github: ' + \
-            'https://github.com/mostaphaRoudsari/Butterfly/tree/master/plugin/grasshopper/samplefiles' + \
-            '\nOpen an issue on github if you think this is a bug:' + \
-            ' https://github.com/mostaphaRoudsari/Butterfly/issues'
-        
+    msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
 

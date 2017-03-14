@@ -20,7 +20,7 @@ Load results for a field in probes.
 
 ghenv.Component.Name = "Butterfly_Load Skipped Probes"
 ghenv.Component.NickName = "loadSkippedProbes"
-ghenv.Component.Message = 'VER 0.0.03\nFEB_15_2017'
+ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "07::PostProcess"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -29,12 +29,7 @@ ghenv.Component.AdditionalHelpFromDocStrings = "2"
 try:
     from butterfly_grasshopper.geometry import xyzToPoint
 except ImportError as e:
-    msg = '\nFailed to import butterfly. Did you install butterfly on your machine?' + \
-            '\nYou can download the installer file from github: ' + \
-            'https://github.com/mostaphaRoudsari/Butterfly/tree/master/plugin/grasshopper/samplefiles' + \
-            '\nOpen an issue on github if you think this is a bug:' + \
-            ' https://github.com/mostaphaRoudsari/Butterfly/issues'
-
+    msg = '\nFailed to import butterfly:'
 
 if _solution:
     try:
