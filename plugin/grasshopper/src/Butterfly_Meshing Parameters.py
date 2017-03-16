@@ -39,7 +39,7 @@ except ImportError as e:
 
 # create blockMeshDict based on BBox
 if _gradXYZ_:
-    _gradXYZ_ = _gradXYZ_.X, _gradXYZ_.Y, _gradXYZ_.Z
+    _cellSizeXYZ_ = _cellSizeXYZ_.X, _cellSizeXYZ_.Y, _cellSizeXYZ_.Z
 
 meshParams = MeshingParameters(
     _cellSizeXYZ_, _gradXYZ_, _locationInMesh_, _globRefineLevel_)
