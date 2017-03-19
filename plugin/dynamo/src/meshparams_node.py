@@ -10,7 +10,7 @@ except ImportError as e:
     raise ImportError('{}\n{}'.format(msg, e))
 
 # create blockMeshDict based on BBox
-if _gradXYZ_:
+if _cellSizeXYZ_:
     _cellSizeXYZ_ = _cellSizeXYZ_.X, _cellSizeXYZ_.Y, _cellSizeXYZ_.Z
 
 meshParams = MeshingParameters(

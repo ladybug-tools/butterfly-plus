@@ -25,7 +25,7 @@ Set meshing parameters for blockMesh and snappyHexMesh.
 
 ghenv.Component.Name = "Butterfly_Meshing Parameters"
 ghenv.Component.NickName = "meshParams"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nMAR_19_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "4"
@@ -38,7 +38,7 @@ except ImportError as e:
     raise ImportError('{}\n{}'.format(msg, e))
 
 # create blockMeshDict based on BBox
-if _gradXYZ_:
+if _cellSizeXYZ_:
     _cellSizeXYZ_ = _cellSizeXYZ_.X, _cellSizeXYZ_.Y, _cellSizeXYZ_.Z
 
 meshParams = MeshingParameters(
