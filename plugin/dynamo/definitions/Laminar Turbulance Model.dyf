@@ -1,6 +1,6 @@
-<Workspace Category="Butterfly.04::Turbulance" Description="Large eddy simulation (LES) modelling.
+<Workspace Category="Butterfly.04::Turbulence" Description="Large eddy simulation (LES) modelling.
 Read more: http://cfd.direct/openfoam/user-guide/turbulence/
-Watch this: https://www.youtube.com/watch?v=Eu_4ppppQmw" ID="ad75585c-80d7-4b7b-93b5-a84a6a00f668" Name="Laminar Turbulance Model" Version="1.2.0.2690" X="400" Y="-100" zoom="0.5">
+Watch this: https://www.youtube.com/watch?v=Eu_4ppppQmw" ID="ad75585c-80d7-4b7b-93b5-a84a6a00f668" Name="Laminar Turbulence Model" Version="1.2.0.2690" X="400" Y="-100" zoom="0.5">
   <NamespaceResolutionMap/>
   <Elements>
     <Dynamo.Graph.Nodes.CodeBlockNodeModel CodeText="&quot;Butterfly&quot;;&#xA;&quot;leminar_node.py&quot;;" ShouldFocus="false" guid="24349850-196e-409f-a897-acfd5ab7d26d" isFrozen="false" isPinned="false" isSelectedInput="true" isUpstreamVisible="true" isVisible="true" lacing="Disabled" nickname="input python script" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" x="-750" y="390"/>

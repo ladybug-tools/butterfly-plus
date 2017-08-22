@@ -1,6 +1,6 @@
-<Workspace Category="Butterfly.04::Turbulance" Description="Reynolds-averaged simulation (RAS) turbulence model.
+<Workspace Category="Butterfly.04::Turbulence" Description="Reynolds-averaged simulation (RAS) turbulence model.
 Read more: http://cfd.direct/openfoam/user-guide/turbulence/
-Watch this: https://www.youtube.com/watch?v=Eu_4ppppQmw" ID="47452640-e6ff-44d1-9d2d-91eee128a93e" Name="RAS Turbulance Model" Version="1.2.0.2690" X="400" Y="-100" zoom="0.5">
+Watch this: https://www.youtube.com/watch?v=Eu_4ppppQmw" ID="47452640-e6ff-44d1-9d2d-91eee128a93e" Name="RAS Turbulence Model" Version="1.2.0.2690" X="400" Y="-100" zoom="0.5">
   <NamespaceResolutionMap/>
   <Elements>
     <Dynamo.Graph.Nodes.CodeBlockNodeModel CodeText="&quot;Butterfly&quot;;&#xA;&quot;ras_node.py&quot;;" ShouldFocus="false" guid="ed8055a8-3bda-43a7-bee9-59d918244f32" isFrozen="false" isPinned="false" isSelectedInput="true" isUpstreamVisible="true" isVisible="true" lacing="Disabled" nickname="input python script" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" x="-750" y="390"/>
