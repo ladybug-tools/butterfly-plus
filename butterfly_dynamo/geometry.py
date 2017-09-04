@@ -27,26 +27,27 @@ class MeshDS(object):
     Attributes:
         geometries: A list of Dynamo meshes or Breps. All input geometries
             will be converted as a joined mesh.
-        meshingParameters: A tuple for tolerance and maxGridLines (default: (-1, 512)).
+        meshing_parameters: A tuple for tolerance and max_grid_lines
+            (default: (-1, 512)).
     """
 
-    def __init__(self, geometries, meshingParameters=None):
+    def __init__(self, geometries, meshing_parameters=None):
         """Init Butterfly geometry in Dynamo."""
-        if not meshingParameters:
-            meshingParameters = -1, 512
+        if not meshing_parameters:
+            meshing_parameters = -1, 512
         try:
-            tolerance = int(meshingParameters[0])
-            maxGridLines = int(meshingParameters[1])
+            tolerance = int(meshing_parameters[0])
+            max_grid_lines = int(meshing_parameters[1])
         except Exception as e:
-            msg = 'Failed to read meshingParameters from {}:\n{}'.format(
-                meshingParameters, e
+            msg = 'Failed to read meshing_parameters from {}:\n{}'.format(
+                meshing_parameters, e
             )
             print(msg)
             tolerance = -1
-            maxGridLines = 512
+            max_grid_lines = 512
 
         self.__tolerance = tolerance
-        self.__maxGridLines = maxGridLines
+        self.__max_grid_lines = max_grid_lines
         self.geometry = geometries
 
     @property
@@ -70,14 +71,14 @@ class MeshDS(object):
                     # not a mesh
                     _geo.append(
                         MeshToolkit.Mesh.ByGeometry(
-                            g, self.__tolerance, self.__maxGridLines))
+                            g, self.__tolerance, self.__max_grid_lines))
                 elif hasattr(g, 'vertices'):
                     _geo.append(g)
             except Exception as e:
                 raise ValueError(
                     "Failed to create a mesh from {}:\n\t{}".format(type(g), e))
 
-        self.__geometry = self.__joinMesh(_geo)
+        self.__geometry = self.__join_mesh(_geo)
 
     @property
     def normals(self):
@@ -90,32 +91,32 @@ class MeshDS(object):
         return tuple((v.X, v.Y, v.Z) for v in self.geometry.Vertices())
 
     @property
-    def faceIndices(self):
+    def face_indices(self):
         """Mesh Face Indices."""
         _ind = tuple(self.geometry.VertexIndicesByTri())
         return tuple(_ind[3 * i: 3 * i + 3] for i in range(len(_ind) / 3))
 
-    def __joinMesh(self, mesh):
+    def __join_mesh(self, mesh):
         """Join a list of meshes into a joined mesh."""
         if len(mesh) == 1:
             return mesh[0]
 
         # collect vertices of all the meshes
-        dsPts = (pt for m in mesh for pt in m.Vertices())
-        verCount = int(-mesh[0].VertexCount)
+        ds_pts = (pt for m in mesh for pt in m.Vertices())
+        ver_count = int(-mesh[0].VertexCount)
         ind = []
         for m in mesh:
-            verCount += int(m.VertexCount)
-            ind.extend((int(i) + verCount for i in m.VertexIndicesByTri()))
+            ver_count += int(m.VertexCount)
+            ind.extend((int(i) + ver_count for i in m.VertexIndicesByTri()))
 
-        joinedMesh = MeshToolkit.Mesh.ByVerticesAndIndices(dsPts, ind)
-        return joinedMesh
+        joined_mesh = MeshToolkit.Mesh.ByVerticesAndIndices(ds_pts, ind)
+        return joined_mesh
 
     def duplicate(self):
         """Return a copy of DSMesh."""
         return deepcopy(self)
 
-    def ToString(self):
+    def to_string(self):
         """Overwrite .NET ToString method."""
         return self.__repr__()
 
@@ -131,23 +132,23 @@ class BFGeometryDS(BFGeometry):
         name: Name as a string (A-Z a-z 0-9).
         geometries: A list of Dynamo meshes or Breps. All input geometries
             will be converted as a joined mesh.
-        boundaryCondition: Boundary condition for this geometry
-        meshingParameters: Dynamo meshing parameters for meshing brep geometries.
+        boundary_condition: Boundary condition for this geometry
+        meshing_parameters: Dynamo meshing parameters for meshing brep geometries.
             In case geometry is Mesh this input won't be used.
     """
 
-    def __init__(self, name, geometries, boundaryCondition=None,
-                 refinementLevels=None, nSurfaceLayers=None, tolerance=-1,
-                 maxGridLines=512):
+    def __init__(self, name, geometries, boundary_condition=None,
+                 refinement_levels=None, n_surface_layers=None, tolerance=-1,
+                 max_grid_lines=512):
         """Init Butterfly geometry in Dynamo."""
         # convert input geometries to a butterfly DSMesh.
-        _mesh = MeshDS(geometries, (tolerance, maxGridLines))
+        _mesh = MeshDS(geometries, (tolerance, max_grid_lines))
 
         self.__geometry = _mesh.geometry
         # put indices in groups of three
-        BFGeometry.__init__(self, name, _mesh.vertices, _mesh.faceIndices,
-                            _mesh.normals, boundaryCondition, refinementLevels,
-                            nSurfaceLayers)
+        BFGeometry.__init__(self, name, _mesh.vertices, _mesh.face_indices,
+                            _mesh.normals, boundary_condition, refinement_levels,
+                            n_surface_layers)
 
     @property
     def geometry(self):
@@ -165,24 +166,24 @@ class BFBlockGeometry_DS(BFGeometryDS):
         vertices: A flatten list of (x, y, z) for vertices.
         faceIndices: A flatten list of (a, b, c) for indices for each face.
         normals: A flatten list of (x, y, z) for face normals.
-        boundaryCondition: Boundary condition for this geometry.
+        boundary_condition: Boundary condition for this geometry.
         borderVertices: List of lists of (x, y, z) values for each quad face of
             the geometry.
     """
 
-    def __init__(self, name, geometries, boundaryCondition=None, tolerance=-1,
-                 maxGridLines=512):
+    def __init__(self, name, geometries, boundary_condition=None, tolerance=-1,
+                 max_grid_lines=512):
         """Init Butterfly block geometry in Dynamo."""
-        BFGeometryDS.__init__(self, name, geometries, boundaryCondition,
-                              tolerance=tolerance, maxGridLines=maxGridLines)
+        BFGeometryDS.__init__(self, name, geometries, boundary_condition,
+                              tolerance=tolerance, max_grid_lines=max_grid_lines)
 
     @property
-    def isBFBlockGeometry(self):
+    def is_bf_block_geometry(self):
         """Return True for Butterfly block geometries."""
         return True
 
     @property
-    def borderVertices(self):
+    def border_vertices(self):
         """Return list of border vertices."""
         # BFBlockGeometry is planar so vertices of geometry are the same as
         # vertices of meshed geometry
@@ -190,16 +191,16 @@ class BFBlockGeometry_DS(BFGeometryDS):
 
 
 # TODO(): add coloring
-def BFMeshToMesh(bfMesh, color=None, scale=1):
+def bf_mesh_to_mesh(bf_mesh, color=None, scale=1):
     """convert a BFMesh object to Dynamo mesh."""
-    assert hasattr(bfMesh, 'vertices'), \
-        '\t{} is not a valid BFMesh.'.format(bfMesh)
-    assert hasattr(bfMesh, 'faceIndices'), \
-        '\t{} is not a valid BFMesh.'.format(bfMesh)
+    assert hasattr(bf_mesh, 'vertices'), \
+        '\t{} is not a valid BFMesh.'.format(bf_mesh)
+    assert hasattr(bf_mesh, 'faceIndices'), \
+        '\t{} is not a valid BFMesh.'.format(bf_mesh)
 
-    dsPts = (DSGeometry.Point.ByCoordinates(*p) for p in bfMesh.vertices)
-    ind = (i for face in bfMesh.faceIndices for i in face)
-    mesh = MeshToolkit.Mesh.ByVerticesAndIndices(dsPts, ind)
+    ds_pts = (DSGeometry.Point.ByCoordinates(*p) for p in bf_mesh.vertices)
+    ind = (i for face in bf_mesh.face_indices for i in face)
+    mesh = MeshToolkit.Mesh.ByVerticesAndIndices(ds_pts, ind)
 
     if scale != 1:
         mesh.Scale(scale)
@@ -211,11 +212,11 @@ def BFMeshToMesh(bfMesh, color=None, scale=1):
     return mesh
 
 
-def xyzToPoint(xyz, convertFromMeters=1):
+def xyz_to_point(xyz, convert_from_meters=1):
     """Convert a xyz tuple to Point."""
-    return DSGeometry.Point.ByCoordinates(*(i * convertFromMeters for i in xyz))
+    return DSGeometry.Point.ByCoordinates(*(i * convert_from_meters for i in xyz))
 
 
-def xyzToVector(xyz):
+def xyz_to_vector(xyz):
     """Convert a xyz tuple to Vector."""
     return DSGeometry.Vector.ByCoordinates(*xyz)
