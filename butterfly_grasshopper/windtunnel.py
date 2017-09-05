@@ -4,7 +4,7 @@ import butterfly.windtunnel
 from butterfly.z0 import Z0
 
 from .case import Case
-from .unitconversion import convertDocumentUnitsToMeters
+from .unitconversion import convert_document_units_to_meters
 
 
 class WindTunnelGH(butterfly.windtunnel.WindTunnel):
@@ -12,9 +12,9 @@ class WindTunnelGH(butterfly.windtunnel.WindTunnel):
 
     Args:
         geometries: List of butterfly geometries that will be inside the tunnel.
-        windVector: Wind vector as a Vector3D. The length of the vector will be
-            used as wind speed in m/s at Zref.
-        tunnelParameters: Butterfly tunnel parameters.
+        wind_vector: Wind vector as a Vector3D. The length of the vector will be
+            used as wind speed in m/s at zref.
+        tunnel_parameters: Butterfly tunnel parameters.
         landscape: An integer between 0-7 to calculate roughness [z0] (default: 7).
             You can find full description of the landscape in Table I at this
             link: (http://onlinelibrary.wiley.com/doi/10.1002/met.273/pdf)
@@ -58,13 +58,13 @@ class WindTunnelGH(butterfly.windtunnel.WindTunnel):
             high-rise buildings, or large forests of irregular height with many
             clearings.
         meshingparameters: Butterfly MeshingParameters.
-        Zref: Reference height for wind velocity in meters (default: 10).
+        zref: Reference height for wind velocity in meters (default: 10).
     """
 
     @classmethod
-    def fromGeometriesWindVectorAndParameters(
-        cls, name, geometries, windVector, tunnelParameters=None, landscape=1,
-            meshingParameters=None, Zref=None):
+    def from_geometries_wind_vector_and_parameters(
+        cls, name, geometries, wind_vector, tunnel_parameters=None, landscape=1,
+            meshing_parameters=None, zref=None):
         """Grasshopper wind tunnel."""
         try:
             roughness = Z0()[landscape]
@@ -73,16 +73,16 @@ class WindTunnelGH(butterfly.windtunnel.WindTunnel):
                 landscape, e)
             )
 
-        convertToMeters = convertDocumentUnitsToMeters()
+        convert_to_meters = convert_document_units_to_meters()
 
-        tunnelParameters = tunnelParameters or butterfly.windtunnel.TunnelParameters()
+        tunnel_parameters = tunnel_parameters or butterfly.windtunnel.TunnelParameters()
 
         # init openFOAM windTunnel
-        return super(WindTunnelGH, cls).fromGeometriesWindVectorAndParameters(
-            name, geometries, windVector, tunnelParameters, roughness,
-            meshingParameters, Zref, convertToMeters
+        return super(WindTunnelGH, cls).from_geometries_wind_vector_and_parameters(
+            name, geometries, wind_vector, tunnel_parameters, roughness,
+            meshing_parameters, zref, convert_to_meters
         )
 
-    def toOpenFOAMCase(self, make2dParameters=None):
+    def to_open_foam_case(self, make2d_parameters=None):
         """Return a BF case for this wind tunnel."""
-        return Case.fromWindTunnel(self, make2dParameters)
+        return Case.fromWindTunnel(self, make2d_parameters)
