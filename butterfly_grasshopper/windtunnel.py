@@ -83,6 +83,6 @@ class WindTunnelGH(butterfly.windtunnel.WindTunnel):
             meshing_parameters, zref, convert_to_meters
         )
 
-    def to_open_foam_case(self, make2d_parameters=None):
+    def to_of_case(self, make2d_parameters=None):
         """Return a BF case for this wind tunnel."""
         return Case.fromWindTunnel(self, make2d_parameters)
