@@ -7,7 +7,7 @@
 # @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
 
 """
-Inside/Ouside region refinement.
+Distance region refinement.
 
 -
 
@@ -22,7 +22,7 @@ Inside/Ouside region refinement.
 
 ghenv.Component.Name = "Butterfly_DistanceRefinementMode"
 ghenv.Component.NickName = "distRefMode"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nOCT_07_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "5"

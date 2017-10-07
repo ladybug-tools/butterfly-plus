@@ -13,8 +13,8 @@ Wind tunnel parameters.
 
     Args:
         _windwardX_: Multiplier value for windward extension (default: 3).
-        _topX_: Multiplier value for top extension (default: 3).
-        _sideX_: Multiplier value for side extension (default: 2).
+        _topX_: Multiplier value for top extension (default: 5).
+        _sideX_: Multiplier value for side extension (default: 5).
         _leewardX_: Multiplier value for leeward extension (default: 15).
     Returns:
         readMe!: Reports, errors, warnings, etc.
@@ -23,7 +23,7 @@ Wind tunnel parameters.
 
 ghenv.Component.Name = "Butterfly_Wind Tunnel Parameters"
 ghenv.Component.NickName = "tunnelParams"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nOCT_07_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
