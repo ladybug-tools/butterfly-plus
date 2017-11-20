@@ -92,7 +92,7 @@ class MeshGH(object):
         """Return a copy of GHMesh."""
         return deepcopy(self)
 
-    def to_string(self):
+    def ToString(self):
         """Overwrite .NET ToString method."""
         return self.__repr__()
 
@@ -114,7 +114,7 @@ class BFGeometryGH(BFGeometry):
     """
 
     def __init__(self, name, geometries, boundary_condition=None,
-                 refinement_levels=None, n_surface_layers=None,
+                 refinementLevels=None, nSurfaceLayers=None,
                  meshing_parameters=None):
         """Init Butterfly geometry in Grasshopper."""
         # convert input geometries to a butterfly GHMesh.
@@ -123,8 +123,8 @@ class BFGeometryGH(BFGeometry):
         self.__geometry = _mesh.geometry
 
         BFGeometry.__init__(self, name, _mesh.vertices, _mesh.face_indices,
-                            _mesh.normals, boundary_condition, refinement_levels,
-                            n_surface_layers)
+                            _mesh.normals, boundary_condition, refinementLevels,
+                            nSurfaceLayers)
 
     @property
     def geometry(self):
@@ -132,7 +132,7 @@ class BFGeometryGH(BFGeometry):
         return self.__geometry
 
 
-class BFBlockGeometry_GH(BFGeometryGH):
+class BFBlockGeometryGH(BFGeometryGH):
     """Butterfly block geometry.
 
     Use this geometry to create geometries for blockMeshDict.
@@ -156,7 +156,7 @@ class BFBlockGeometry_GH(BFGeometryGH):
         self.__calculate_block_border_vertices(geometries)
 
     @property
-    def is_bf_block_geometry(self):
+    def isBFBlockGeometry(self):
         """Return True for Butterfly block geometries."""
         return True
 

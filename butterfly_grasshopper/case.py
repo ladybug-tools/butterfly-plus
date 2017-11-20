@@ -10,17 +10,17 @@ class Case(butterfly.case.Case):
     def load_mesh(self, inner_mesh=True):
         """Return OpenFOAM mesh as a Rhino mesh."""
         if hasattr(self, 'blockMeshDict'):
-            convert_to_meters = self.blockMeshDict.convert_to_meters
+            convertToMeters = self.blockMeshDict.convertToMeters
         else:
-            convert_to_meters = 1
+            convertToMeters = 1
 
-        return load_of_mesh(self.poly_mesh_folder, convert_to_meters, inner_mesh)
+        return load_of_mesh(self.polyMesh_folder, convertToMeters, inner_mesh)
 
     def load_points(self):
         """Return OpenFOAM mesh as a Rhino mesh."""
         if hasattr(self, 'blockMeshDict'):
-            convert_to_meters = self.blockMeshDict.convert_to_meters
+            convertToMeters = self.blockMeshDict.convertToMeters
         else:
-            convert_to_meters = 1
+            convertToMeters = 1
 
-        return load_of_points(self.poly_mesh_folder, convert_to_meters)
+        return load_of_points(self.polyMesh_folder, convertToMeters)

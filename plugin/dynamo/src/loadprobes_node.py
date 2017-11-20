@@ -4,7 +4,7 @@ probes = None
 
 try:
     from butterfly.utilities import loadProbesFromPostProcessingFile
-    from butterfly_dynamo.geometry import xyzToPoint
+    from butterfly_dynamo.geometry import xyz_to_point
     import butterfly_dynamo.unitconversion as uc
 except ImportError as e:
     msg = '\nFailed to import butterfly:'
@@ -28,7 +28,7 @@ if _solution and _field:
     
     c = 1.0 / uc.convertDocumentUnitsToMeters()
     try:
-        probes = tuple(xyzToPoint(v, c) for v in rawValues)
+        probes = tuple(xyz_to_point(v, c) for v in rawValues)
     except:
         probes = rawValues
 

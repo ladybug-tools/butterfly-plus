@@ -5,7 +5,7 @@ probes = values = None
 
 try:
     from butterfly.utilities import loadProbesFromPostProcessingFile
-    from butterfly_dynamo.geometry import xyzToPoint, xyzToVector
+    from butterfly_dynamo.geometry import xyz_to_point, xyzToVector
     import butterfly_dynamo.unitconversion as uc
 except ImportError as e:
     msg = '\nFailed to import butterfly:'
@@ -25,7 +25,7 @@ if _solution and _name and any(p is not None for p in _points) and _field and _r
     res = _solution.sample(_name, points, _field)
     
     if res:
-        probes = (xyzToPoint(p, cr) for p in res.probes)
+        probes = (xyz_to_point(p, cr) for p in res.probes)
         
         if isinstance(res.values[0], float) == 1:
             values = res.values

@@ -28,7 +28,7 @@ ghenv.Component.AdditionalHelpFromDocStrings = "1"
 
 try:
     from butterfly.utilities import loadProbesFromPostProcessingFile
-    from butterfly_grasshopper.geometry import xyzToPoint
+    from butterfly_grasshopper.geometry import xyz_to_point
     import butterfly_grasshopper.unitconversion as uc
 except ImportError as e:
     msg = '\nFailed to import butterfly:'
@@ -52,6 +52,6 @@ if _solution and _field:
     
     c = 1.0 / uc.convertDocumentUnitsToMeters()
     try:
-        probes = tuple(xyzToPoint(v, c) for v in rawValues)
+        probes = tuple(xyz_to_point(v, c) for v in rawValues)
     except:
         probes = rawValues

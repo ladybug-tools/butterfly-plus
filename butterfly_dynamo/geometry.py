@@ -116,7 +116,7 @@ class MeshDS(object):
         """Return a copy of DSMesh."""
         return deepcopy(self)
 
-    def to_string(self):
+    def ToString(self):
         """Overwrite .NET ToString method."""
         return self.__repr__()
 
@@ -138,7 +138,7 @@ class BFGeometryDS(BFGeometry):
     """
 
     def __init__(self, name, geometries, boundary_condition=None,
-                 refinement_levels=None, n_surface_layers=None, tolerance=-1,
+                 refinementLevels=None, nSurfaceLayers=None, tolerance=-1,
                  max_grid_lines=512):
         """Init Butterfly geometry in Dynamo."""
         # convert input geometries to a butterfly DSMesh.
@@ -147,8 +147,8 @@ class BFGeometryDS(BFGeometry):
         self.__geometry = _mesh.geometry
         # put indices in groups of three
         BFGeometry.__init__(self, name, _mesh.vertices, _mesh.face_indices,
-                            _mesh.normals, boundary_condition, refinement_levels,
-                            n_surface_layers)
+                            _mesh.normals, boundary_condition, refinementLevels,
+                            nSurfaceLayers)
 
     @property
     def geometry(self):
@@ -156,7 +156,7 @@ class BFGeometryDS(BFGeometry):
         return self.__geometry
 
 
-class BFBlockGeometry_DS(BFGeometryDS):
+class BFBlockGeometryDS(BFGeometryDS):
     """Butterfly block geometry.
 
     Use this geometry to create geometries for blockMeshDict.
@@ -178,7 +178,7 @@ class BFBlockGeometry_DS(BFGeometryDS):
                               tolerance=tolerance, max_grid_lines=max_grid_lines)
 
     @property
-    def is_bf_block_geometry(self):
+    def isBFBlockGeometryDS(self):
         """Return True for Butterfly block geometries."""
         return True
 

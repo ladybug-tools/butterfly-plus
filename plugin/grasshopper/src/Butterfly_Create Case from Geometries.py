@@ -40,7 +40,7 @@ ghenv.Component.AdditionalHelpFromDocStrings = "2"
 
 try:
     from butterfly_grasshopper.case import Case
-    from butterfly_grasshopper.geometry import xyzToPoint
+    from butterfly_grasshopper.geometry import xyz_to_point
     import butterfly_grasshopper.unitconversion as uc
 except ImportError as e:
     msg = '\nFailed to import butterfly:'
@@ -68,7 +68,7 @@ if _run and _name and _BFGeometries:
         
         case.blockMeshDict.expandByCellsCount(xCount, yCount, zCount)
     
-    blockPts = (xyzToPoint(v) for v in case.blockMeshDict.vertices)
+    blockPts = (xyz_to_point(v) for v in case.blockMeshDict.vertices)
     
     case.save(overwrite=(_run + 1) % 2)
 

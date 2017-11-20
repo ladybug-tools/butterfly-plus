@@ -73,16 +73,16 @@ class WindTunnelGH(butterfly.windtunnel.WindTunnel):
                 landscape, e)
             )
 
-        convert_to_meters = convert_document_units_to_meters()
+        convertToMeters = convert_document_units_to_meters()
 
         tunnel_parameters = tunnel_parameters or butterfly.windtunnel.TunnelParameters()
 
         # init openFOAM windTunnel
         return super(WindTunnelGH, cls).from_geometries_wind_vector_and_parameters(
             name, geometries, wind_vector, tunnel_parameters, roughness,
-            meshing_parameters, zref, convert_to_meters
+            meshing_parameters, zref, convertToMeters
         )
 
-    def to_of_case(self, make2d_parameters=None):
+    def to_openfoam_case(self, make2d_parameters=None):
         """Return a BF case for this wind tunnel."""
-        return Case.fromWindTunnel(self, make2d_parameters)
+        return Case.from_wind_tunnel(self, make2d_parameters)

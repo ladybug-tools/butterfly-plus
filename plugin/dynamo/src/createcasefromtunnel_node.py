@@ -4,7 +4,7 @@ pts = case = None
 
 try:
     from butterfly_dynamo.windtunnel import WindTunnelDS
-    from butterfly_dynamo.geometry import xyzToPoint
+    from butterfly_dynamo.geometry import xyz_to_point
 except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
@@ -26,7 +26,7 @@ def main():
     
     print "Number of divisions: {}, {} and {}".format(*wt.blockMeshDict.nDivXYZ)
     
-    pts = (xyzToPoint(v) for v in case.blockMeshDict.vertices)
+    pts = (xyz_to_point(v) for v in case.blockMeshDict.vertices)
 
     return wt, pts, case
 

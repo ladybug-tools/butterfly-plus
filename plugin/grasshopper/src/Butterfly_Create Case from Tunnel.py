@@ -83,7 +83,7 @@ ghenv.Component.AdditionalHelpFromDocStrings = "3"
 
 try:
     from butterfly_grasshopper.windtunnel import WindTunnelGH
-    from butterfly_grasshopper.geometry import xyzToPoint
+    from butterfly_grasshopper.geometry import xyz_to_point
 except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
@@ -105,7 +105,7 @@ def main():
     
     print "Number of divisions: {}, {} and {}".format(*wt.blockMeshDict.nDivXYZ)
     
-    pts = (xyzToPoint(v) for v in case.blockMeshDict.vertices)
+    pts = (xyz_to_point(v) for v in case.blockMeshDict.vertices)
 
     return wt, pts, case
 
