@@ -26,7 +26,7 @@ blockMesh
 
 ghenv.Component.Name = "Butterfly_blockMesh"
 ghenv.Component.NickName = "blockMesh"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_19_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -34,15 +34,15 @@ ghenv.Component.AdditionalHelpFromDocStrings = "1"
 if _case and _run:
     # remove current snappyHexMeshFolders
     if _overwrite_:
-        _case.removeSnappyHexMeshFolders()
+        _case.remove_snappyHexMesh_folders()
     # run blockMesh
     if _cellSizeXYZ_:
-        _case.blockMeshDict.nDivXYZByCellSize(
+        _case.blockMeshDict.n_div_xyz_by_cell_size(
             (_cellSizeXYZ_.X, _cellSizeXYZ_.Y, _cellSizeXYZ_.Z))
     if _gradXYZ_:
         _case.blockMeshDict.grading = _gradXYZ_
     if _cellSizeXYZ_ or _gradXYZ_:
-        _case.blockMeshDict.save(_case.projectDir)
+        _case.blockMeshDict.save(_case.project_dir)
     
     log = _case.blockMesh(overwrite=True)
     if log.success:

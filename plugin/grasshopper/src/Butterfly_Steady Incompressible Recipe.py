@@ -27,7 +27,7 @@ Steady Incompressible Recipe.
 
 ghenv.Component.Name = "Butterfly_Steady Incompressible Recipe"
 ghenv.Component.NickName = "SteadyIncomp"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_21_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "05::Recipe"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -40,8 +40,3 @@ except ImportError as e:
 
 recipe = SteadyIncompressible(_turbulenceProp_, fvSchemes_, fvSolution_,
                               residualControl_, _relaxationFactors_)
-
-l = len(recipe.quantities)
-q = ''.join(q + ' ..... ' if (c + 1) % 4 != 0 and c + 1 != l else q + '\n'
-            for c, q in enumerate(recipe.quantities))
-

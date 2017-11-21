@@ -76,7 +76,7 @@ Create Case from wind tunnel.
 
 ghenv.Component.Name = "Butterfly_Create Case from Tunnel"
 ghenv.Component.NickName = "createCaseFromTunnel"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_19_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
@@ -90,20 +90,20 @@ except ImportError as e:
 
 
 def main():
-    wt = WindTunnelGH.fromGeometriesWindVectorAndParameters(
+    wt = WindTunnelGH.from_geometries_wind_vector_and_parameters(
         _name, _BFGeometries, _windVector, _tunnelParams_, _landscape_,
         _meshParams_, _refWindHeight_)
         
     for region in refRegions_:
-        wt.addRefinementRegion(region)
+        wt.add_refinementRegion(region)
     
     # save with overwrite set to False. User can clean the folder using purge if they need to.
-    case = wt.save(overwrite=(_run + 1) % 2, make2dParameters=make2dParams_)
+    case = wt.save(overwrite=(_run + 1) % 2, make2d_parameters=make2dParams_)
     
     print "Wind tunnel dimensions: {}, {} and {}".format(
         case.blockMeshDict.width, case.blockMeshDict.length, case.blockMeshDict.height)
     
-    print "Number of divisions: {}, {} and {}".format(*wt.blockMeshDict.nDivXYZ)
+    print "Number of divisions: {}, {} and {}".format(*wt.blockMeshDict.n_div_xyz)
     
     pts = (xyz_to_point(v) for v in case.blockMeshDict.vertices)
 

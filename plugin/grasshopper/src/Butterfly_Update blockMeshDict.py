@@ -23,13 +23,13 @@ Update blockMeshDict.
 
 ghenv.Component.Name = "Butterfly_Update blockMeshDict"
 ghenv.Component.NickName = "updateBMDict"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_21_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "4"
 if _run and _case and any(p is not None for p in _points) and xAxis_:
     
-    _case.blockMeshDict.updateVertices(
+    _case.blockMeshDict.update_vertices(
         tuple((p.X, p.Y, p.Z) for p in _points), (xAxis_.X, xAxis_.Y, xAxis_.Z))
-    _case.blockMeshDict.save(_case.projectDir)
+    _case.blockMeshDict.save(_case.project_dir)
     case = _case

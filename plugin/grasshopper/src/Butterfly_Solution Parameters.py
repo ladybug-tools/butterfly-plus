@@ -20,7 +20,7 @@ Solution Parameters.
 """
 ghenv.Component.Name = "Butterfly_Solution Parameters"
 ghenv.Component.NickName = "solutionParams"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_19_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "06::Solution"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -32,10 +32,10 @@ except ImportError as e:
     raise ImportError('{}\n{}'.format(msg, e))
 
 if controlDict_:
-    controlDict_ = SolutionParameter.fromCppDictionary('controlDict', str(controlDict_))
+    controlDict_ = SolutionParameter.from_cpp_dictionary('controlDict', str(controlDict_))
 
 if probes_:
-    probes_ = SolutionParameter.fromCppDictionary('probes', str(probes_))
+    probes_ = SolutionParameter.from_cpp_dictionary('probes', str(probes_))
 
 
 params = [controlDict_, probes_] + additionalParams_

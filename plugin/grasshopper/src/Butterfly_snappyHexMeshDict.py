@@ -34,7 +34,7 @@ Read more about snappyHexMeshDict here:
 
 ghenv.Component.Name = "Butterfly_snappyHexMeshDict"
 ghenv.Component.NickName = "snappyHexMeshDict"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_19_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -42,7 +42,7 @@ ghenv.Component.AdditionalHelpFromDocStrings = "2"
 try:
     from butterfly.solution import SolutionParameter
     from butterfly.parser import CppDictParser
-    from butterfly.utilities import updateDict
+    from butterfly.utilities import update_dict
 except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
@@ -72,7 +72,7 @@ if additionalParameters_:
     except Exception as e:
         raise ValueError("Failed to load additionalParameters_:\n%s" % str(e))
     else:
-        values = updateDict(values, addedValues)
+        values = update_dict(values, addedValues)
 
 snappyHexMeshDict = SolutionParameter('snappyHexMeshDict', values)
 
