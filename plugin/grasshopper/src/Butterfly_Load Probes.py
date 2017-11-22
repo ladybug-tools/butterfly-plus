@@ -21,13 +21,13 @@ Load probes from a folder.
 
 ghenv.Component.Name = "Butterfly_Load Probes"
 ghenv.Component.NickName = "loadProbes"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "07::PostProcess"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
 
 try:
-    from butterfly.utilities import loadProbesFromPostProcessingFile
+    from butterfly.utilities import load_probes_from_postProcessing_file
     from butterfly_grasshopper.geometry import xyz_to_point
     import butterfly_grasshopper.unitconversion as uc
 except ImportError as e:
@@ -41,16 +41,16 @@ if _solution and _field:
     if isinstance(_solution, str):
         projectDir = _solution.replace('\\\\','/').replace('\\','/')
         probesDir = os.path.join(projectDir, 'postProcessing\\probes') 
-        rawValues = loadProbesFromPostProcessingFile(probesDir, _field)
+        rawValues = load_probes_from_postProcessing_file(probesDir, _field)
     else:
         assert hasattr(_solution, 'loadProbes'), \
             'Invalid Input: <{}> is not a valid Butterfly Solution.'.format(_solution)
         try:
-            rawValues = _solution.loadProbes(_field)
+            rawValues = _solution.load_probes(_field)
         except Exception as e:
             raise ValueError('Failed to load probes:\n\t{}'.format(e))
     
-    c = 1.0 / uc.convertDocumentUnitsToMeters()
+    c = 1.0 / uc.convert_document_units_to_meters()
     try:
         probes = tuple(xyz_to_point(v, c) for v in rawValues)
     except:

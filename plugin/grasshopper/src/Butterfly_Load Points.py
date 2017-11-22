@@ -21,10 +21,10 @@ Load points from the case for preview.
 
 ghenv.Component.Name = "Butterfly_Load Points"
 ghenv.Component.NickName = "loadPoints"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "4"
 
 if _case and _load:
-    pts = _case.loadPoints()
+    pts = _case.load_points()

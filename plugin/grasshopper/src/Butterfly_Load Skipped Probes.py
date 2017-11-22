@@ -20,7 +20,7 @@ Load results for a field in probes.
 
 ghenv.Component.Name = "Butterfly_Load Skipped Probes"
 ghenv.Component.NickName = "loadSkippedProbes"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "07::PostProcess"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -33,7 +33,7 @@ except ImportError as e:
 
 if _solution:
     try:
-        pts = _solution.skippedProbes()
+        pts = _solution.skipped_probes()
     except AssertionError as e:
         raise ValueError('{}.\nDid you run the solution before loading the probes?'.format(e))
     except AttributeError:

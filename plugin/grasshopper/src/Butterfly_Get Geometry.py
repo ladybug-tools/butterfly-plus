@@ -21,20 +21,20 @@ Update fvSchemes values based on mesh orthogonalities.
 
 ghenv.Component.Name = "Butterfly_Get Geometry"
 ghenv.Component.NickName = "getGeometry"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "08::Etc"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
 
 try:
-    from butterfly_grasshopper.geometry import BFMeshToMesh
+    from butterfly_grasshopper.geometry import bf_mesh_to_mesh
 except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 else:
     from itertools import chain
 
-def getGeometry(obj):
+def get_geometry(obj):
     """Get Grasshopper geometry from butterfly objects."""
     try:
         return obj.geometry
@@ -45,7 +45,7 @@ def getGeometry(obj):
             print '{} has no geometry!'.format(type(obj))
 
 if _BFObjects:
-    geo = chain.from_iterable(getGeometry(obj) for obj in _BFObjects)
+    geo = chain.from_iterable(get_geometry(obj) for obj in _BFObjects)
     
     try:
         geo = tuple(geo)
@@ -58,5 +58,5 @@ if _BFObjects:
             l = len(colors_)
             col = (colors_[c % l] for c, g in enumerate(geo))
 
-        geometries = (BFMeshToMesh(g, c) for g, c in zip(geo, col))
+        geometries = (bf_mesh_to_mesh(g, c) for g, c in zip(geo, col))
 

@@ -23,7 +23,7 @@ Look Up Case Folder.
 
 ghenv.Component.Name = "Butterfly_Look Up Case Folder"
 ghenv.Component.NickName = "lookUpCaseFolder"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "08::Etc"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -43,7 +43,7 @@ if _case:
         projectDir = _case.replace('\\\\','/').replace('\\','/')
     else:
         try:
-            projectDir = _case.projectDir
+            projectDir = _case.project_dir
         except:
             raise ValueError('Invaild input for _case.')
     

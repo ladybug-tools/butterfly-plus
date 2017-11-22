@@ -27,15 +27,15 @@ Use this component yo load the results for a case that you have ran already.
 
 ghenv.Component.Name = "Butterfly_Sample Case"
 ghenv.Component.NickName = "sampleCase"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "07::PostProcess"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
 
 
 try:
-    from butterfly.utilities import loadProbesFromPostProcessingFile
-    from butterfly_grasshopper.geometry import xyz_to_point, xyzToVector
+    from butterfly.utilities import load_probes_from_postProcessing_file
+    from butterfly_grasshopper.geometry import xyz_to_point, xyz_to_vector
     import butterfly_grasshopper.unitconversion as uc
 except ImportError as e:
     msg = '\nFailed to import butterfly:'
@@ -48,7 +48,7 @@ if _solution and _name and any(p is not None for p in _points) and _field and _r
     
     assert hasattr(_solution, 'sample'), \
         'Invalid Input: <{}> is not a valid Butterfly Case or Solution.'.format(_solution)
-    c = uc.convertDocumentUnitsToMeters()
+    c = uc.convert_document_units_to_meters()
     cr = 1.0 / c
     
     points = ((pt.X * c, pt.Y * c, pt.Z * c) for pt in _points)
@@ -60,4 +60,4 @@ if _solution and _name and any(p is not None for p in _points) and _field and _r
         if isinstance(res.values[0], float) == 1:
             values = res.values
         else:
-            values = (xyzToVector(v) for v in res.values)
+            values = (xyz_to_vector(v) for v in res.values)

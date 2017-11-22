@@ -139,12 +139,11 @@ class BFBlockGeometryGH(BFGeometryGH):
 
     Attributes:
         name: Name as a string (A-Z a-z 0-9 _).
-        vertices: A flatten list of (x, y, z) for vertices.
-        faceIndices: A flatten list of (a, b, c) for indices for each face.
-        normals: A flatten list of (x, y, z) for face normals.
-        boundary_condition: Boundary condition for this geometry.
-        borderVertices: List of lists of (x, y, z) values for each quad face of
-            the geometry.
+        geometries: A list of Grasshopper meshes or Breps. All input geometries
+            will be converted as a joined mesh.
+        boundary_condition: Boundary condition for this geometry
+        meshing_parameters: Grasshopper meshing parameters for meshing brep geometries.
+            In case geometry is Mesh this input won't be used.
     """
 
     def __init__(self, name, geometries, boundary_condition=None,
@@ -189,7 +188,7 @@ def bf_mesh_to_mesh(bf_mesh, color=None, scale=1):
     """convert a BFMesh object to Grasshopper mesh."""
     assert hasattr(bf_mesh, 'vertices'), \
         '\t{} is not a valid BFMesh.'.format(bf_mesh)
-    assert hasattr(bf_mesh, 'faceIndices'), \
+    assert hasattr(bf_mesh, 'face_indices'), \
         '\t{} is not a valid BFMesh.'.format(bf_mesh)
 
     mesh = rc.Geometry.Mesh()
