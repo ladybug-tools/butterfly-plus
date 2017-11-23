@@ -62,10 +62,6 @@ Create Case from wind tunnel.
             high-rise buildings, or large forests of irregular height with many
             clearings.
         make2dParams_: Butterfly parameters to make a 2d wind tunnel.
-        _meshParams_: Butterfly meshing parameters. You can set-up meshing parameters
-            also on the blockMesh and snappyHexMesh components to overwrite this
-            settings. Use this input to set up the meshing parameters if you are
-            not running the meshing locally.
         _tunnelParams_: Butterfly tunnel parameters.
         _run: Create wind tunnel case from inputs.
     Returns:
@@ -76,7 +72,7 @@ Create Case from wind tunnel.
 
 ghenv.Component.Name = "Butterfly_Create Case from Tunnel"
 ghenv.Component.NickName = "createCaseFromTunnel"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_19_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
@@ -90,6 +86,9 @@ except ImportError as e:
 
 
 def main():
+    # meshing parameters are moved to blockMesh and snappyHexMesh components
+    _meshParams_ = None
+    
     wt = WindTunnelGH.from_geometries_wind_vector_and_parameters(
         _name, _BFGeometries, _windVector, _tunnelParams_, _landscape_,
         _meshParams_, _refWindHeight_)

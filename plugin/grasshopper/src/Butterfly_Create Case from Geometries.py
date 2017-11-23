@@ -33,7 +33,7 @@ Create an OpenFOAM Case from geometries.
 
 ghenv.Component.Name = "Butterfly_Create Case from Geometries"
 ghenv.Component.NickName = "caseFromGeos"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_21_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -46,7 +46,10 @@ except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
-if _run and _name and _BFGeometries: 
+if _run and _name and _BFGeometries:
+    # meshing parameters are moved to blockMesh and snappyHexMesh components
+    _meshParams_ = None
+    
     # create OpenFoam Case
     ctm = uc.convert_document_units_to_meters()
     

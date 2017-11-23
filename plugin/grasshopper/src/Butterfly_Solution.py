@@ -32,7 +32,7 @@ Run recipes using OpenFOAM.
 
 ghenv.Component.Name = "Butterfly_Solution"
 ghenv.Component.NickName = "solution"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_19_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "06::Solution"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -87,7 +87,8 @@ if _case and _recipe and _write:
         else:
             # analysis is over
             solution = sticky[uniqueKey]
-            solution.terminate()
+            if run_:
+                solution.terminate()
             # remove solution from sticky
             if uniqueKey in sticky:
                 del(sticky[uniqueKey])
@@ -100,12 +101,14 @@ if _case and _recipe and _write:
         
     except Exception as e:
         # clean up solution in case of failure
-        if solution:
+        if solution and run_:
             solution.terminate()
         if uniqueKey in sticky:
             del(sticky[uniqueKey])
+        
         print '***\n{}\n***'.format(e)
-    
+        import traceback
+        print(traceback.format_exc())
     if solution:
         logFiles = solution.log_files or os.path.join(_case.project_dir,
                                                       _recipe.log_file)
