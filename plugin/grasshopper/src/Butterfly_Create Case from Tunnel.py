@@ -72,11 +72,16 @@ Create Case from wind tunnel.
 
 ghenv.Component.Name = "Butterfly_Create Case from Tunnel"
 ghenv.Component.NickName = "createCaseFromTunnel"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_25_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
 
+
+#import butterfly
+#import butterfly_grasshopper
+#reload(butterfly.windtunnel)
+#reload(butterfly_grasshopper.windtunnel)
 try:
     from butterfly_grasshopper.windtunnel import WindTunnelGH
     from butterfly_grasshopper.geometry import xyz_to_point
@@ -102,12 +107,10 @@ def main():
     print "Wind tunnel dimensions: {}, {} and {}".format(
         case.blockMeshDict.width, case.blockMeshDict.length, case.blockMeshDict.height)
     
-    print "Number of divisions: {}, {} and {}".format(*wt.blockMeshDict.n_div_xyz)
-    
     pts = (xyz_to_point(v) for v in case.blockMeshDict.vertices)
 
     return wt, pts, case
 
 if _run and _name and _BFGeometries and _windVector:
-        tunnel, pts, case = main()
+        windTunnel, pts, case = main()
 
