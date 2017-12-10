@@ -3,19 +3,19 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Ladybug; If not, see <http://www.gnu.org/licenses/>.
-# 
+#
 # @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
 
 """
-Inside/Ouside region refinement.
+Distance region refinement.
 
 -
 
     Args:
-        _levels: (d, l) values for level where d is distance of region and 
+        _levels: (d, l) values for level where d is distance of region and
             l is level of refinement. 'levels' specifies per distance to the
             surface the wanted refinement level.
-        
+
     Returns:
         distanceRefMode: Refinement mode.
 """
