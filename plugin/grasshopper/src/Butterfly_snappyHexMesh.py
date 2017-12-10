@@ -28,7 +28,7 @@ snappyHexMesh
 
 ghenv.Component.Name = "Butterfly_snappyHexMesh"
 ghenv.Component.NickName = "snappyHexMesh"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
+ghenv.Component.Message = 'VER 0.0.04\nDEC_10_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -95,17 +95,7 @@ if _case and _write:
 
     # remove result folders if any
     _case.remove_result_folders()
-    
-    if _case.is_polyMesh_snappyHexMesh:
-        # check if meshBlock has been replaced by sHM
-        # remove current snappyHexMesh and re-run block mesh
-        _case.remove_snappyHexMesh_folders()
-        # run blockMesh
-        log = _case.blockMesh(overwrite=True)
-    
-        if not log.success:
-            raise Exception("\n --> blockMesh Failed!\n%s" % log.error)                        
-    
+
     if decomposeParDict_:
         _case.decomposeParDict = decomposeParDict_
         _case.decomposeParDict.save(_case.project_dir)
@@ -122,6 +112,16 @@ if _case and _write:
             print('TODO: add surfaceFeatureExtract to case command list.')
 
     if run_:
+        if _case.is_polyMesh_snappyHexMesh:
+            # check if meshBlock has been replaced by sHM
+            # remove current snappyHexMesh and re-run block mesh
+            _case.remove_snappyHexMesh_folders()
+            # run blockMesh
+            log = _case.blockMesh(overwrite=True)
+        
+            if not log.success:
+                raise Exception("\n --> blockMesh Failed!\n%s" % log.error)     
+        
         log = _case.snappyHexMesh()
         _case.remove_processor_folders()
         
