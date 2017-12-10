@@ -4,7 +4,7 @@ skippedProbes = None
 
 
 try:
-    from butterfly_dynamo.geometry import xyzToPoint
+    from butterfly_dynamo.geometry import xyz_to_point
 except ImportError as e:
     msg = '\nFailed to import butterfly:'
 
@@ -16,7 +16,7 @@ if _solution:
     except AttributeError:
         raise ValueError('{} is not a butterfly Solution.'.format(_solution))
     try:
-        skippedProbes = tuple(xyzToPoint(v) for v in pts)
+        skippedProbes = tuple(xyz_to_point(v) for v in pts)
     except:
         skippedProbes = pts
 

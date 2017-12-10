@@ -6,7 +6,7 @@ except ImportError:
     pass
 
 
-def ghComponentTimer(ghComp, interval=600, pause=False):
+def gh_component_timer(gh_comp, interval=600, pause=False):
     """
     Update the component at the interval like using a GH timer.
 
@@ -15,7 +15,7 @@ def ghComponentTimer(ghComp, interval=600, pause=False):
     Authors: Anders Holden Deleuran (CITA/KADK), Mario Deuss (LGG/EPFL)
 
     Args:
-        ghComp: Grasshopper component.
+        gh_comp: Grasshopper component.
         interval: Interval in milliseconds (default: 600).
         pause: Pause timer if set to True
     """
@@ -27,12 +27,12 @@ def ghComponentTimer(ghComp, interval=600, pause=False):
     interval = max((1, interval))
 
     # Get the Grasshopper document and component that owns this script
-    ghDoc = ghComp.OnPingDocument()
+    gh_doc = gh_comp.OnPingDocument()
 
     # Define the callback function
-    def callBack(ghDoc):
-        ghComp.ExpireSolution(False)
+    def call_back(gh_doc):
+        gh_comp.ExpireSolution(False)
 
     # Update the solution
-    ghDoc.ScheduleSolution(interval,
-                           gh.Kernel.GH_Document.GH_ScheduleDelegate(callBack))
+    gh_doc.ScheduleSolution(interval,
+                            gh.Kernel.GH_Document.GH_ScheduleDelegate(call_back))

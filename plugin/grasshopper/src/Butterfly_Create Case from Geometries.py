@@ -33,42 +33,45 @@ Create an OpenFOAM Case from geometries.
 
 ghenv.Component.Name = "Butterfly_Create Case from Geometries"
 ghenv.Component.NickName = "caseFromGeos"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
 
 try:
     from butterfly_grasshopper.case import Case
-    from butterfly_grasshopper.geometry import xyzToPoint
+    from butterfly_grasshopper.geometry import xyz_to_point
     import butterfly_grasshopper.unitconversion as uc
 except ImportError as e:
     msg = '\nFailed to import butterfly:'
+    raise ImportError('{}\n{}'.format(msg, e))
 
-
-if _run and _name and _BFGeometries: 
-    # create OpenFoam Case
-    ctm = uc.convertDocumentUnitsToMeters()
+if _run and _name and _BFGeometries:
+    # meshing parameters are moved to blockMesh and snappyHexMesh components
+    _meshParams_ = None
     
-    case = Case.fromBFGeometries(_name, tuple(_BFGeometries),
-        meshingParameters=_meshParams_, make2dParameters=make2dParams_,
+    # create OpenFoam Case
+    ctm = uc.convert_document_units_to_meters()
+    
+    case = Case.from_bf_geometries(_name, tuple(_BFGeometries),
+        meshing_parameters=_meshParams_, make2d_parameters=make2dParams_,
         convertToMeters=ctm)
     
     for reg in refRegions_:
-        case.addRefinementRegion(reg)
+        case.add_refinement_region(reg)
     
     if expandBlockMesh_:
         xCount, yCount, zCount = 1, 1, 1
-        if case.blockMeshDict.is2dInXDirection:
+        if case.blockMeshDict.is2d_in_x_direction:
             xCount = 0
-        if case.blockMeshDict.is2dInYDirection:
+        if case.blockMeshDict.is2d_in_y_direction:
             yCount = 0
-        if case.blockMeshDict.is2dInZDirection:
+        if case.blockMeshDict.is2d_in_z_direction:
             zCount = 0
         
-        case.blockMeshDict.expandByCellsCount(xCount, yCount, zCount)
+        case.blockMeshDict.expand_by_cells_count(xCount, yCount, zCount)
     
-    blockPts = (xyzToPoint(v) for v in case.blockMeshDict.vertices)
+    blockPts = (xyz_to_point(v) for v in case.blockMeshDict.vertices)
     
     case.save(overwrite=(_run + 1) % 2)
 

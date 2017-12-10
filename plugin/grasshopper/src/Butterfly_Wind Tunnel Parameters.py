@@ -3,7 +3,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Ladybug; If not, see <http://www.gnu.org/licenses/>.
-# 
+#
 # @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
 
 """
@@ -23,7 +23,7 @@ Wind tunnel parameters.
 
 ghenv.Component.Name = "Butterfly_Wind Tunnel Parameters"
 ghenv.Component.NickName = "tunnelParams"
-ghenv.Component.Message = 'VER 0.0.04\nOCT_07_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_21_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"

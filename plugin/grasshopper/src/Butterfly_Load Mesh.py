@@ -23,10 +23,10 @@ Load mesh from the case for preview.
 
 ghenv.Component.Name = "Butterfly_Load Mesh"
 ghenv.Component.NickName = "loadMesh"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_19_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "4"
 
 if _case and _load:
-    mesh = _case.loadMesh(innerMesh_)
+    mesh = _case.load_mesh(innerMesh_)

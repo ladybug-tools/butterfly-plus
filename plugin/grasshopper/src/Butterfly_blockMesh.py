@@ -13,12 +13,13 @@ blockMesh
 
     Args:
         _case: Butterfly case.
-        _cellSizeXYZ_: Cell size in (x, y, z) as a tuple (default: length / 5).
-            This value updates number of divisions in blockMeshDict.
         _gradXYZ_: A simpleGrading (default: simpleGrading(1, 1, 1)). This value
             updates grading in blockMeshDict.
+        _cellCount_: Number of cells in (x, y, z) as a Point (default: 5).
+            This value updates number of divisions in blockMeshDict.
         _overwrite_: Remove current snappyHexMesh folders from the case if any (default: True). 
-        _run: run blockMesh.
+        _write: Updat blockMeshDict.
+        run_: run blockMesh.
     Returns:
         readMe!: Reports, errors, warnings, etc.
         case: Butterfly case.
@@ -26,26 +27,34 @@ blockMesh
 
 ghenv.Component.Name = "Butterfly_blockMesh"
 ghenv.Component.NickName = "blockMesh"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_26_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
 
-if _case and _run:
+if _case and _write:
     # remove current snappyHexMeshFolders
     if _overwrite_:
-        _case.removeSnappyHexMeshFolders()
+        _case.remove_snappyHexMesh_folders()
     # run blockMesh
-    if _cellSizeXYZ_:
-        _case.blockMeshDict.nDivXYZByCellSize(
-            (_cellSizeXYZ_.X, _cellSizeXYZ_.Y, _cellSizeXYZ_.Z))
+    if _cellCount_:
+        print('Updating cell size in blockMeshDict.')
+        _case.blockMeshDict.n_div_xyz = \
+            (_cellCount_.X, _cellCount_.Y, _cellCount_.Z)
     if _gradXYZ_:
+        print('Updating grading in blockMeshDict.')
         _case.blockMeshDict.grading = _gradXYZ_
-    if _cellSizeXYZ_ or _gradXYZ_:
-        _case.blockMeshDict.save(_case.projectDir)
+    if _cellCount_ or _gradXYZ_:
+        path = _case.blockMeshDict.save(_case.project_dir)
+        print('Saved changes to blockMeshDict to:\n{}'.format(path))
     
-    log = _case.blockMesh(overwrite=True)
-    if log.success:
-        case = _case
+    if run_:
+        log = _case.blockMesh(overwrite=True)
+        if log.success:
+            case = _case
+        else:
+            raise Exception("\n\n\nButterfly failed to run OpenFOAM command!\n%s" % log.error)
     else:
-        raise Exception("\n\n\nButterfly failed to run OpenFOAM command!\n%s" % log.error)
+        # output case for next step of meshing. SnappyHexMesh component will run
+        # blockMesh if it is not already created and ran.
+        case = _case

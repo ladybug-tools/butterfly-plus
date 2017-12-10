@@ -22,7 +22,7 @@ Create an OpenFOAM Case from an existing case in a local folder.
 
 ghenv.Component.Name = "Butterfly_Create Case from Folder"
 ghenv.Component.NickName = "caseFromFolder"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_21_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -36,5 +36,5 @@ except ImportError as e:
 
 if _folder and _run: 
     # create OpenFoam Case
-    case = Case.fromFolder(_folder, name_, 1.0 / uc.convertDocumentUnitsToMeters())
+    case = Case.from_folder(_folder, name_, 1.0 / uc.convert_document_units_to_meters())
     case.save(overwrite=False)

@@ -32,7 +32,7 @@ Run recipes using OpenFOAM.
 
 ghenv.Component.Name = "Butterfly_Solution"
 ghenv.Component.NickName = "solution"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "06::Solution"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -41,7 +41,7 @@ from scriptcontext import sticky
 import os
 
 try:
-    from butterfly_grasshopper.timer import ghComponentTimer
+    from butterfly_grasshopper.timer import gh_component_timer
     from butterfly.solution import Solution
 except ImportError as e:
     msg = '\nFailed to import butterfly:'
@@ -58,12 +58,12 @@ if _case and _recipe and _write:
             # solution hasn't been created or has been removed
             # create a new one and copy it to sticky
             solution = Solution(_case, _recipe, decomposeParDict_, solutionParams_)
-            residualFields = solution.residualFields
+            residualFields = solution.residual_fields
             # pass solution parameter to __init__
             sticky[uniqueKey] = solution
             if run_:
                 timestep = solution.timestep
-                solution.updateSolutionParams(solutionParams_, timestep)
+                solution.update_solution_params(solutionParams_, timestep)
                 if _interval_ < 0:
                     # wait for the run to be done
                     solution.run(wait=True)
@@ -72,22 +72,23 @@ if _case and _recipe and _write:
         else:
             # solution is there so just load it
             solution = sticky[uniqueKey]
-            residualFields = solution.residualFields
+            residualFields = solution.residual_fields
     
-        isRunning = solution.isRunning
+        isRunning = solution.is_running
         info = solution.info
         timestep = info.timestep
         residualValues = info.residualValues
         if run_ and isRunning:
             print 'running...'
             # update parameters if there has been changes.
-            solution.updateFromRecipe(_recipe)
-            solution.updateSolutionParams(solutionParams_, timestep)
-            ghComponentTimer(ghenv.Component, interval=_interval_*1000)
+            solution.update_from_recipe(_recipe)
+            solution.update_solution_params(solutionParams_, timestep)
+            gh_component_timer(ghenv.Component, interval=_interval_*1000)
         else:
             # analysis is over
             solution = sticky[uniqueKey]
-            solution.terminate()
+            if run_:
+                solution.terminate()
             # remove solution from sticky
             if uniqueKey in sticky:
                 del(sticky[uniqueKey])
@@ -100,11 +101,14 @@ if _case and _recipe and _write:
         
     except Exception as e:
         # clean up solution in case of failure
-        solution.terminate()
+        if solution and run_:
+            solution.terminate()
         if uniqueKey in sticky:
             del(sticky[uniqueKey])
+        
         print '***\n{}\n***'.format(e)
-    
+        import traceback
+        print(traceback.format_exc())
     if solution:
-        logFiles = solution.logFiles or os.path.join(_case.projectDir,
-                                                     _recipe.logFile)
+        logFiles = solution.log_files or os.path.join(_case.project_dir,
+                                                      _recipe.log_file)

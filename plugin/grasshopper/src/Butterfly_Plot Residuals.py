@@ -33,7 +33,7 @@ Load residual values for a case.
 
 ghenv.Component.Name = "Butterfly_Plot Residuals"
 ghenv.Component.NickName = "plotResiduals"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_21_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "07::PostProcess"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -91,14 +91,14 @@ except ImportError as e:
 
 def main():
     
-    assert hasattr(_solution, 'residualFile'), \
+    assert hasattr(_solution, 'residual_file'), \
         '{} is not a valid Solution.'.format(_solution)
     
-    p = ResidualParser(_solution.residualFile)
+    p = ResidualParser(_solution.residual_file)
     
     if not _fields_:
         try:
-            fields = _solution.residualFields
+            fields = _solution.residual_fields
         except:
             raise ValueError('Failed to load fields from solution {}.'.format(_solution))
     else:
@@ -107,11 +107,11 @@ def main():
     for f in fields:
         print f
     
-    timeRange = '{} To {}'.format(*p.timeRange)
+    timeRange = '{} To {}'.format(*p.time_range)
     
     # calculate curves
     crvs = tuple(rc.Geometry.PolylineCurve(rc.Geometry.Point3d(c, float(i), 0)
-        for c, i in enumerate(p.getResiduals(field, timeRange_)))
+        for c, i in enumerate(p.get_residuals(field, timeRange_)))
         for field in fields)
         
     # find bounding box for curves
@@ -125,7 +125,7 @@ def main():
     length = bbox.Max[0] - bbox.Min[0]
     resLine = rc.Geometry.Line(startPt, rc.Geometry.Vector3d(length, 0, 0)).ToNurbsCurve()
     bbox = rc.Geometry.BoundingBox.Union(bbox, resLine.GetBoundingBox(True))
-    
+
     # scale curves
     curves = rectToRectMapping(crvs, rectFromBoundingBox(bbox),
                       rectFromBoundingBox(_rect.GetBoundingBox(True)))
@@ -150,9 +150,14 @@ def main():
     return timeRange, curves, [], resLine, colors[:len(curves)]
 
 if _solution and _rect and _load:
-    
-    output = main()
-    
+    try:
+        output = main()
+    except ZeroDivisionError:
+        raise Exception(
+            'Failed to load residual fields. '
+            'Read the warnings above for more details.'
+        )
+        
     if output:
         timeRange, curves, meshes, residualLine, colors = output
 

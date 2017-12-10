@@ -24,11 +24,11 @@ chekMesh
 
 ghenv.Component.Name = "Butterfly_chekMesh"
 ghenv.Component.NickName = "chekMesh"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_21_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
 
 if _case and _run:
-    max, average = _case.calculateMeshOrthogonality()
+    max, average = _case.calculate_mesh_orthogonality()
     print "Mesh non-orthogonality max: {}, Mesh non-orthogonality average: {}".format(max, average)

@@ -22,14 +22,14 @@ Load results for a field in probes.
 
 ghenv.Component.Name = "Butterfly_Load Probes Value"
 ghenv.Component.NickName = "loadProbesValue"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_19_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "07::PostProcess"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
 
 try:
-    from butterfly.utilities import loadProbeValuesFromFolder
-    from butterfly_grasshopper.geometry import xyzToVector
+    from butterfly.utilities import load_probe_values_from_folder
+    from butterfly_grasshopper.geometry import xyz_to_vector
 except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
@@ -41,16 +41,16 @@ if _solution and _field:
     if isinstance(_solution, str):
         projectDir = _solution.replace('\\\\','/').replace('\\','/')
         probesDir = os.path.join(projectDir, 'postProcessing\\probes') 
-        rawValues = loadProbeValuesFromFolder(probesDir, _field)
+        rawValues = load_probe_values_from_folder(probesDir, _field)
     else:
-        assert hasattr(_solution, 'loadProbeValues'), \
+        assert hasattr(_solution, 'load_probe_values'), \
             'Invalid Input: <{}> is not a valid Butterfly Solution.'.format(_solution)
         try:
-            rawValues = _solution.loadProbeValues(_field)
+            rawValues = _solution.load_probe_values(_field)
         except Exception as e:
             raise ValueError('Failed to load values:\n\t{}'.format(e))
             
     try:
-        values = tuple(xyzToVector(v) for v in rawValues)
+        values = tuple(xyz_to_vector(v) for v in rawValues)
     except:
         values = rawValues

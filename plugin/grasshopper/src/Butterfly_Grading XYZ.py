@@ -16,13 +16,13 @@ Create a grading for multiple segmentGradings.
         _segmentGradings: A list of segmentGradings.
         
     Returns:
-        grading: A butterfly Grading. Connect the output to gradXYZ component to
-            set the grading of blockMesh in X, Y or Z direction.
+        gradXYZ: A butterfly Grading. Connect this output to blockMesh component
+            to set grading of blockMesh in X, Y or Z direction.
 """
 
 ghenv.Component.Name = "Butterfly_Grading XYZ"
 ghenv.Component.NickName = "gradXYZ"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_26_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"

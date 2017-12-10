@@ -20,7 +20,7 @@ Create Butterfly probes
 
 ghenv.Component.Name = "Butterfly_probes"
 ghenv.Component.NickName = "probes"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_21_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "06::Solution"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -32,9 +32,9 @@ except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
-if _points:
+if _points and _points[0]:
     probes = Probes()
-    c = uc.convertDocumentUnitsToMeters()
+    c = uc.convert_document_units_to_meters()
     probes.probeLocations = ((p.X * c, p.Y * c, p.Z * c) for p in _points)
     probes.fields = _fields_
     probes.writeInterval = _writeInterval_

@@ -62,10 +62,6 @@ Create Case from wind tunnel.
             high-rise buildings, or large forests of irregular height with many
             clearings.
         make2dParams_: Butterfly parameters to make a 2d wind tunnel.
-        _meshParams_: Butterfly meshing parameters. You can set-up meshing parameters
-            also on the blockMesh and snappyHexMesh components to overwrite this
-            settings. Use this input to set up the meshing parameters if you are
-            not running the meshing locally.
         _tunnelParams_: Butterfly tunnel parameters.
         _run: Create wind tunnel case from inputs.
     Returns:
@@ -76,39 +72,45 @@ Create Case from wind tunnel.
 
 ghenv.Component.Name = "Butterfly_Create Case from Tunnel"
 ghenv.Component.NickName = "createCaseFromTunnel"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_25_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
 
+
+#import butterfly
+#import butterfly_grasshopper
+#reload(butterfly.windtunnel)
+#reload(butterfly_grasshopper.windtunnel)
 try:
     from butterfly_grasshopper.windtunnel import WindTunnelGH
-    from butterfly_grasshopper.geometry import xyzToPoint
+    from butterfly_grasshopper.geometry import xyz_to_point
 except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
 
 def main():
-    wt = WindTunnelGH.fromGeometriesWindVectorAndParameters(
+    # meshing parameters are moved to blockMesh and snappyHexMesh components
+    _meshParams_ = None
+    
+    wt = WindTunnelGH.from_geometries_wind_vector_and_parameters(
         _name, _BFGeometries, _windVector, _tunnelParams_, _landscape_,
         _meshParams_, _refWindHeight_)
         
     for region in refRegions_:
-        wt.addRefinementRegion(region)
+        wt.add_refinementRegion(region)
     
     # save with overwrite set to False. User can clean the folder using purge if they need to.
-    case = wt.save(overwrite=(_run + 1) % 2, make2dParameters=make2dParams_)
+    case = wt.save(overwrite=(_run + 1) % 2, make2d_parameters=make2dParams_)
     
     print "Wind tunnel dimensions: {}, {} and {}".format(
         case.blockMeshDict.width, case.blockMeshDict.length, case.blockMeshDict.height)
     
-    print "Number of divisions: {}, {} and {}".format(*wt.blockMeshDict.nDivXYZ)
-    
-    pts = (xyzToPoint(v) for v in case.blockMeshDict.vertices)
+    pts = (xyz_to_point(v) for v in case.blockMeshDict.vertices)
 
     return wt, pts, case
 
 if _run and _name and _BFGeometries and _windVector:
-        tunnel, pts, case = main()
+        windTunnel, pts, case = main()
 

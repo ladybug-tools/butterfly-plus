@@ -7,21 +7,21 @@ except ImportError:
     pass
 
 
-def convertDocumentUnitsToMeters():
+def convert_document_units_to_meters():
     """Calculate converToMeters value for this document."""
-    docUnit = sc.doc.ModelUnitSystem
+    doc_unit = sc.doc.ModelUnitSystem
 
-    if docUnit == us.Meters:
+    if doc_unit == us.Meters:
         return 1.0000
-    elif docUnit == us.Centimeters:
+    elif doc_unit == us.Centimeters:
         return 0.010
-    elif docUnit == us.Millimeters:
+    elif doc_unit == us.Millimeters:
         return 0.0010
-    elif docUnit == us.Feet:
+    elif doc_unit == us.Feet:
         return 0.3050
-    elif docUnit == us.Inches:
+    elif doc_unit == us.Inches:
         return 0.0254
-    elif docUnit == us.Kilometers:
+    elif doc_unit == us.Kilometers:
         return 1000.0000
     else:
         print "Unknown unit. Meters will be used instead."

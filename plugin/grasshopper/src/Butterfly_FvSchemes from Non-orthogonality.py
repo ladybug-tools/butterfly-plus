@@ -21,7 +21,7 @@ Generate fvSchemes based on mesh non-orthogonalities.
 
 ghenv.Component.Name = "Butterfly_FvSchemes from Non-orthogonality"
 ghenv.Component.NickName = "genFvSchemes"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "08::Etc"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
@@ -33,5 +33,5 @@ except ImportError as e:
     raise ImportError('{}\n{}'.format(msg, e))
 
 if  _nonOrthogonality:
-    fvSchemes = FvSchemes.fromMeshOrthogonality(_nonOrthogonality)
+    fvSchemes = FvSchemes.from_mesh_orthogonality(_nonOrthogonality)
 
