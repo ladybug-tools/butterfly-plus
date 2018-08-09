@@ -26,7 +26,7 @@ def tryGetPluginPath(plugin):
     assert _ver &gt;= 1.2, 'You need Dynamo 1.2 or higher to use this plugin!'
 
     _appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-    _dynamoPath = ('\\').join(_loc[0].split('\\')[-4:-1])
+    _dynamoPath = '%s\\%.1f' % (('\\').join(_loc[0].split('\\')[-4:-2]), float(_loc[0].split('\\')[-2]))
     # if the assembly is cached put Revit folder first, and then try to load it from core
     _dynamoPaths = (_dynamoPath.replace('Dynamo Core', 'Dynamo Revit'),
                     _dynamoPath.replace('Dynamo Revit', 'Dynamo Core'))
@@ -69,7 +69,7 @@ try:
         '    import traceback\n' + \
         '    OUT = "ERROR:\\n\\t{}".format(str(e)) + \\\n' + \
         '    "\\n\\nIf you think this is a bug submit an issue on github.\\n" + \\\n' + \
-        '    "https://github.com/ladybug-analysis-tools/honeybee-plus/issues\\n" +  \\\n' + \
+        '    "https://github.com/ladybug-tools/butterfly-plus/issues\\n" +  \\\n' + \
         '    "and include below error message:\\n\\n" + \\\n' + \
         '    "{}".format(traceback.format_exc())\n'
 
@@ -81,7 +81,7 @@ except Exception, e:
     import traceback
     OUT = "ERROR:\n\t{}".format(str(e)) + \
         "\n\nIf you think this is a bug submit an issue on github.\n" + \
-        "https://github.com/ladybug-analysis-tools/honeybee-plus/issues\n" +  \
+        "https://github.com/ladybug-tools/butterfly-plus/issues\n" +  \
         "and include below error message:\n\n" + \
         "{}".format(traceback.format_exc())
 
