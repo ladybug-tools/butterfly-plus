@@ -22,7 +22,7 @@ C:\Users\%USERNAME%\AppData\Roaming\McNeel\Rhinoceros\5.0\scripts\butterfly
 
 ghenv.Component.Name = "Butterfly"
 ghenv.Component.NickName = "BF::BF"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_21_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_08_2018'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -33,6 +33,26 @@ import sys
 import zipfile
 import shutil
 from Grasshopper.Folders import UserObjectFolders
+
+import System
+System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12
+
+
+def removeButterfly(folder):
+    """Remove current butterfly userobjects."""
+    print('Removing Butterfly UserObjects from {}'.format(folder))
+
+    for f in os.listdir(folder):
+        path = os.path.join(folder, f)
+        
+        if os.path.isdir(path):
+            removeButterfly(path)
+
+        if f.startswith("Butterfly"):
+            try:
+                os.remove(path)    
+            except:
+                print('Failed to remove: {}'.format(path))
 
 
 def installButterfly(update):
@@ -53,8 +73,12 @@ def installButterfly(update):
         if not update and os.path.isdir(libFolder):
             return
         elif update and os.path.isdir(libFolder):
-            shutil.rmtree(libFolder)
-    
+            try:
+                print('Removing {}'.format(libFolder))
+                shutil.rmtree(libFolder)
+            except:
+                print('Failed to remove {}'.format(libFolder))
+                
     for count, (folder, url) in enumerate(zip(folders, urls)):
         # download the zip file
         lib = libs[count]
@@ -86,17 +110,19 @@ def installButterfly(update):
         if count == 1:
             # copy userobjects
             uofolder = UserObjectFolders[0]
+            bfuofolder = os.path.join(uofolder, 'Butterfly')
+            if not os.path.isdir(bfuofolder):
+                os.mkdir(bfuofolder)
+
             bfUserObjectsFolder = os.path.join(targetDirectory, r"butterfly-plus-master\plugin\grasshopper\userObjects")
-            print 'Copying butterfly userobjects to {}.'.format(uofolder)
+            print 'Copying butterfly userobjects to {}'.format(bfuofolder)
             
             # remove all the butterfly userobjects
-            for f in os.listdir(uofolder):
-                if f.startswith("Butterfly"):
-                    os.remove(os.path.join(uofolder, f))
+            removeButterfly(uofolder)
                     
             for f in os.listdir(bfUserObjectsFolder):
                 shutil.copyfile(os.path.join(bfUserObjectsFolder, f),
-                                os.path.join(uofolder, f))
+                                os.path.join(bfuofolder, f))
     
         # try to clean up
         try:
@@ -118,7 +144,7 @@ try:
     import butterfly
     import butterfly_grasshopper
     from butterfly.version import Version
-    print "Imported butterfly from {}\nCurrent version: {}\nswoosh swoosh...".format(butterfly.__file__, Version.bf_ver)
+    print "Imported butterfly from {}\nswoosh swoosh...".format(butterfly.__file__)
     
     try:
         print "Last updated: {}".format(Version.lastUpdated)
