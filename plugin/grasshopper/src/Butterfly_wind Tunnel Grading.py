@@ -35,7 +35,7 @@ This component generates gradingXYZ for an outdoor study (wind tunnel).
 
 ghenv.Component.Name = "Butterfly_wind Tunnel Grading"
 ghenv.Component.NickName = "WTGrading"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_26_2017'
+ghenv.Component.Message = 'VER 0.0.04\nNOV_09_2018'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
@@ -55,4 +55,5 @@ if _windTunnel:
         )
     gradXYZ, cell_count = _windTunnel.calculate_grading(
         _cellSize_[0], _cellToCellRatio_[0], wakeOffset_, heightOffset_)
-    cellCount = xyz_to_point(cell_count)
+    cellCountXYZ = xyz_to_point(cell_count)
+    cellCountTot = int(cellCountXYZ.X * cellCountXYZ.Y * cellCountXYZ.Z)
