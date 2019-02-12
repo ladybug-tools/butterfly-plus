@@ -8,12 +8,12 @@
 
 """
 MultiGrading
-Create a grading for multiple segmentGradings.
+Create a grading for multiple segment_gradings.
 
 -
 
     Args:
-        _segmentGradings: A list of segmentGradings.
+        _segment_gradings: A list of segmentGradings.
         
     Returns:
         grading: A butterfly Grading. Connect the output to gradXYZ component to
@@ -22,7 +22,7 @@ Create a grading for multiple segmentGradings.
 
 ghenv.Component.Name = "Butterfly_MultiGrading"
 ghenv.Component.NickName = "multiGrading"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
@@ -33,5 +33,5 @@ except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
-if _segmentGradings:
-    grading = MultiGrading(_segmentGradings)
+if _segment_gradings:
+    grading = MultiGrading(_segment_gradings)
