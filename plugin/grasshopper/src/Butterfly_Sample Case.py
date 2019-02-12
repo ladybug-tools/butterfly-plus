@@ -19,7 +19,9 @@ Use this component yo load the results for a case that you have ran already.
         _points: A list of flattened points to be sampled.
         _field: Filed of interest as a string (e.g. p, U).
         _run: Set to true to run the sample.
+    
     Returns:
+        report: Reports, erros, warnings, etc.
         probes: List of probes as points. This list should be identical to the input
             _points if there is no skipped points.
         values: List of values as numbers or vectors.
@@ -27,7 +29,7 @@ Use this component yo load the results for a case that you have ran already.
 
 ghenv.Component.Name = "Butterfly_Sample Case"
 ghenv.Component.NickName = "sampleCase"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "07::PostProcess"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"

@@ -17,13 +17,13 @@ Look Up Case Folder.
     Returns:
         zero: Files in zero folder.
         constant: Files in constant folder.
-        triSurface: Files in constant/triSurface folder.
+        tri_surface: Files in constant/triSurface folder.
         system: Files in system folder.
 """
 
 ghenv.Component.Name = "Butterfly_Look Up Case Folder"
 ghenv.Component.NickName = "lookUpCaseFolder"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "08::Etc"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -51,4 +51,4 @@ if _case:
     for p in ('0', 'constant', 'constant/triSurface', 'system'):
         files.append(listfiles(os.path.join(projectDir, p), fullpath_))
     
-    zero, constant, triSurface, system = files
+    zero, constant, tri_surface, system = files

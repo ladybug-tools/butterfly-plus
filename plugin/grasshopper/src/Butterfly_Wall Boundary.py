@@ -14,12 +14,12 @@ Create a wall boundary.
     Args:
         temperature_: Temperature in degrees celsius.
     Returns:
-        wallBoundary: Buttefly wall boundary.
+        wall_boundary: Buttefly wall boundary.
 """
 
 ghenv.Component.Name = "Butterfly_Wall Boundary"
 ghenv.Component.NickName = "wall"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "01::Boundary"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -35,5 +35,5 @@ temperature_ = FixedValue(str(temperature_ + 273.15)) \
                if temperature_ \
                else None
 
-wallBoundary = IndoorWallBoundaryCondition(T=temperature_)
+wall_boundary = IndoorWallBoundaryCondition(T=temperature_)
 

@@ -7,19 +7,19 @@
 # @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
 
 """
-fixedValue boundary condition.
+Fixed value boundary condition.
 
 -
     Args:
         _value: input value.
         
     Returns:
-        fixedValue: fixedValue boundary condition.
+        fixed_value: Fixed value boundary condition.
 """
 
 ghenv.Component.Name = "Butterfly_fixedValue"
 ghenv.Component.NickName = "fixedValue"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "02::BoundaryCondition"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -31,4 +31,4 @@ except ImportError as e:
     raise ImportError('{}\n{}'.format(msg, e))
 
 if _value:
-    fixedValue = FixedValue(_value)
+    fixed_value = FixedValue(_value)

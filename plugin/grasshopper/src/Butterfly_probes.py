@@ -13,14 +13,14 @@ Create Butterfly probes
         _points: A flatten list of points that you're interested to collect the
             values for.
         _fields_: A list of fields such as U, p, k (default: U, p).
-        _writeInterval_: Number of intervals between writing the results (default: 1)
+        _write_interval_: Number of intervals between writing the results (default: 1)
     Returns:
         probes: Butterfly probes.
 """
 
 ghenv.Component.Name = "Butterfly_probes"
 ghenv.Component.NickName = "probes"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_21_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "06::Solution"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -37,4 +37,4 @@ if _points and _points[0]:
     c = uc.convert_document_units_to_meters()
     probes.probeLocations = ((p.X * c, p.Y * c, p.Z * c) for p in _points)
     probes.fields = _fields_
-    probes.writeInterval = _writeInterval_
+    probes.writeInterval = _write_interval_

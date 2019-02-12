@@ -10,16 +10,16 @@
 Set relaxtionFactors values
 
     Args:
-        _quantities: 
-        _values: relaxtionValues
+        _quantities: Quantities.
+        _values: Relaxtion values.
         
     Returns:
-        relaxationFactors: Relaxation factors.
+        relaxation_factors: Relaxation factors.
 """
 
 ghenv.Component.Name = "Butterfly_relaxtionFactors"
 ghenv.Component.NickName = "relaxtionFactors"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "05::Recipe"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -37,6 +37,6 @@ if _quantities and _values:
         'Length of quantities [%d] must be equal to the length of values [%d].' \
         % (len(_quantities), len(_values))
 
-    relaxationFactors = RelaxationFactors(
+    relaxation_factors = RelaxationFactors(
         {key: value for (key, value) in zip(_quantities, _values)}
     )

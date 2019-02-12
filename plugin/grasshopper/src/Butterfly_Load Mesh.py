@@ -13,7 +13,7 @@ Load mesh from the case for preview.
 
     Args:
         _case: Butterfly case.
-        innerMesh_: Set to True to load inner mesh. Default is False which means
+        inner_mesh_: Set to True to load inner mesh. Default is False which means
             the component only loads the mesh for boundary faces.
         _load: Load mesh.
         
@@ -23,10 +23,10 @@ Load mesh from the case for preview.
 
 ghenv.Component.Name = "Butterfly_Load Mesh"
 ghenv.Component.NickName = "loadMesh"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_19_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "4"
 
 if _case and _load:
-    mesh = _case.load_mesh(innerMesh_)
+    mesh = _case.load_mesh(inner_mesh_)

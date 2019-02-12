@@ -13,15 +13,16 @@ Solution Parameter.
         _filename: OpenFOAM filename that the values are belong to (e.g.
             blockMeshDict, fvSchemes).
         _values: new values as a valid OpenFOAM (c++) dictionary.
+        t_range_: Temperature range.
         replace_: Set to True if you want the original dictionary to be replaced
             by new values. Default is False which means the original dictionary
             will be only updated by new values.
     Returns:
-        solutionParam: A solution parameter.
+        solution_par: A solution parameter.
 """
 ghenv.Component.Name = "Butterfly_Solution Parameter"
 ghenv.Component.NickName = "solutionParam"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_21_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "06::Solution"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -33,5 +34,5 @@ except ImportError as e:
     raise ImportError('{}\n{}'.format(msg, e))
 
 if _filename and _values:
-    solutionParam = SolutionParameter.from_cpp_dictionary(
-        _filename, _values, replace_, tRange_)
+    solution_par = SolutionParameter.from_cpp_dictionary(
+        _filename, _values, replace_, t_range_)

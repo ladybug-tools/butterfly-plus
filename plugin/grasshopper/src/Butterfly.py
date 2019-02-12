@@ -13,7 +13,7 @@ C:\Users\%USERNAME%\AppData\Roaming\McNeel\Rhinoceros\5.0\scripts\butterfly
 -
 
     Args:
-        butterflyFolder_: Optional path to load butterfly libraries instead of the
+        butterfly_folder_: Optional path to load butterfly libraries instead of the
             installed version
         update_: Optional boolean to update butterfly even if you have it already installed.
     Returns:
@@ -22,7 +22,7 @@ C:\Users\%USERNAME%\AppData\Roaming\McNeel\Rhinoceros\5.0\scripts\butterfly
 
 ghenv.Component.Name = "Butterfly"
 ghenv.Component.NickName = "BF::BF"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_08_2018'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -38,7 +38,7 @@ import System
 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12
 
 
-def removeButterfly(folder):
+def remove_butterfly(folder):
     """Remove current butterfly userobjects."""
     print('Removing Butterfly UserObjects from {}'.format(folder))
 
@@ -46,7 +46,7 @@ def removeButterfly(folder):
         path = os.path.join(folder, f)
         
         if os.path.isdir(path):
-            removeButterfly(path)
+            remove_butterfly(path)
 
         if f.startswith("Butterfly"):
             try:
@@ -55,7 +55,7 @@ def removeButterfly(folder):
                 print('Failed to remove: {}'.format(path))
 
 
-def installButterfly(update):
+def install_butterfly(update):
     
     """
     This code will download butterfly library from github to:
@@ -66,46 +66,46 @@ def installButterfly(update):
     folders = ('butterfly', 'butterfly-plus')
     libs = ('butterfly', 'butterfly_grasshopper')
 
-    targetDirectory = [p for p in sys.path if p.find('scripts')!= -1][0]
+    target_directory = [p for p in sys.path if p.find('scripts')!= -1][0]
     
     for f in libs:
-        libFolder = os.path.join(targetDirectory, f)
-        if not update and os.path.isdir(libFolder):
+        lib_folder = os.path.join(target_directory, f)
+        if not update and os.path.isdir(lib_folder):
             return
-        elif update and os.path.isdir(libFolder):
+        elif update and os.path.isdir(lib_folder):
             try:
-                print('Removing {}'.format(libFolder))
-                shutil.rmtree(libFolder)
+                print('Removing {}'.format(lib_folder))
+                shutil.rmtree(lib_folder)
             except:
-                print('Failed to remove {}'.format(libFolder))
+                print('Failed to remove {}'.format(lib_folder))
                 
     for count, (folder, url) in enumerate(zip(folders, urls)):
         # download the zip file
         lib = libs[count]
-        print "Downloading {} repository to {}".format(folder, targetDirectory)
-        zipFile = os.path.join(targetDirectory, '%s.zip' % folder)
+        print "Downloading {} repository to {}".format(folder, target_directory)
+        zip_file = os.path.join(target_directory, '%s.zip' % folder)
 
         try:
             client = System.Net.WebClient()
-            client.DownloadFile(url, zipFile)
+            client.DownloadFile(url, zip_file)
         except Exception, e:
             msg = `e` + "\nDownload failed! Try to download and unzip the file manually form:\n" + url
             raise Exception(msg)
             
         #unzip the file
-        with zipfile.ZipFile(zipFile) as zf:
+        with zipfile.ZipFile(zip_file) as zf:
             for f in zf.namelist():
                 if f.endswith('/'):
                     try: os.makedirs(f)
                     except: pass
                 else:
-                    zf.extract(f, targetDirectory)
+                    zf.extract(f, target_directory)
         zf.close()
         
-        bfFolder = os.path.join(targetDirectory, r"{}-master".format(folder), lib)
-        libFolder = os.path.join(targetDirectory, lib)
-        print 'Copying butterfly source code from {} to {}'.format(bfFolder, libFolder)
-        shutil.copytree(bfFolder, libFolder)
+        bf_folder = os.path.join(target_directory, r"{}-master".format(folder), lib)
+        lib_folder = os.path.join(target_directory, lib)
+        print 'Copying butterfly source code from {} to {}'.format(bf_folder, lib_folder)
+        shutil.copytree(bf_folder, lib_folder)
 
         if count == 1:
             # copy userobjects
@@ -114,30 +114,30 @@ def installButterfly(update):
             if not os.path.isdir(bfuofolder):
                 os.mkdir(bfuofolder)
 
-            bfUserObjectsFolder = os.path.join(targetDirectory, r"butterfly-plus-master\plugin\grasshopper\userObjects")
+            bf_user_objects_folder = os.path.join(target_directory, r"butterfly-plus-master\plugin\grasshopper\userObjects")
             print 'Copying butterfly userobjects to {}'.format(bfuofolder)
             
             # remove all the butterfly userobjects
-            removeButterfly(uofolder)
+            remove_butterfly(uofolder)
                     
-            for f in os.listdir(bfUserObjectsFolder):
-                shutil.copyfile(os.path.join(bfUserObjectsFolder, f),
+            for f in os.listdir(bf_user_objects_folder):
+                shutil.copyfile(os.path.join(bf_user_objects_folder, f),
                                 os.path.join(bfuofolder, f))
     
         # try to clean up
         try:
-            shutil.rmtree(os.path.join(targetDirectory, r"{}-master".format(folder)))
-            os.unlink(zipFile)
+            shutil.rmtree(os.path.join(target_directory, r"{}-master".format(folder)))
+            os.unlink(zip_file)
         except:
             pass
 
 
-if not butterflyFolder_:
-    installButterfly(update_)
-elif update_ and not os.path.isdir(butterflyFolder_):
-   installButterfly(update_)
-elif os.path.isdir(butterflyFolder_) and butterflyFolder_ not in sys.path:
-        sys.path.insert(0, butterflyFolder_)
+if not butterfly_folder_:
+    install_butterfly(update_)
+elif update_ and not os.path.isdir(butterfly_folder_):
+   install_butterfly(update_)
+elif os.path.isdir(butterfly_folder_) and butterfly_folder_ not in sys.path:
+        sys.path.insert(0, butterfly_folder_)
 
 
 try:

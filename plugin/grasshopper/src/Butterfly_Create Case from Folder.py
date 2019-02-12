@@ -16,13 +16,13 @@ Create an OpenFOAM Case from an existing case in a local folder.
         _folder: Fullpath to an OpenFoam case folder.
         _run: Create case from inputs.
     Returns:
-        readMe!: Reports, errors, warnings, etc.
+        report: Reports, errors, warnings, etc.
         case: Butterfly case.
 """
 
 ghenv.Component.Name = "Butterfly_Create Case from Folder"
 ghenv.Component.NickName = "caseFromFolder"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_21_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"

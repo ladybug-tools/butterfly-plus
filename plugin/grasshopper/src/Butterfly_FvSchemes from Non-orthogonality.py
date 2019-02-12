@@ -12,16 +12,16 @@ Generate fvSchemes based on mesh non-orthogonalities.
 -
 
     Args:
-        _nonOrthogonality: Maximum mesh non-orthogonality as an integer.
+        _non_orthogonality: Maximum mesh non-orthogonality as an integer.
     Returns:
-        readMe!: Reports, errors, warnings, etc.
-        fvSchemes: Recommended fvSchemes. Use solution parameter to update fvSchemes
+        report: Reports, errors, warnings, etc.
+        fv_schemes: Recommended fvSchemes. Use solution parameter to update fvSchemes
             for the solution.
 """
 
 ghenv.Component.Name = "Butterfly_FvSchemes from Non-orthogonality"
 ghenv.Component.NickName = "genFvSchemes"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "08::Etc"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
@@ -32,6 +32,6 @@ except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
-if  _nonOrthogonality:
-    fvSchemes = FvSchemes.from_mesh_orthogonality(_nonOrthogonality)
+if  _non_orthogonality:
+    fv_schemes = FvSchemes.from_mesh_orthogonality(_non_orthogonality)
 

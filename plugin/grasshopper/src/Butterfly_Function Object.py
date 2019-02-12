@@ -10,13 +10,13 @@
 Function Object.
 
     Args:
-        _funcObject: An OpenFOAM function object in (c++) dictionary format.
+        _func_object: An OpenFOAM function object in (c++) dictionary format.
     Returns:
-        funcObject: A function object.
+        func_object: A function object.
 """
 ghenv.Component.Name = "Butterfly_Function Object"
 ghenv.Component.NickName = "functionObject"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "06::Solution"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -27,5 +27,5 @@ except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
-if _funcObject:
-    funcObject = Function.from_cpp_dictionary(_funcObject)
+if _func_object:
+    func_object = Function.from_cpp_dictionary(_func_object)

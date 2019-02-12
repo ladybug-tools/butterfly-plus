@@ -12,24 +12,24 @@ Wind vector.
 -
 
     Args:
-        _windSpeed: Wind speed in m/s at a the reference height (_refWindHeight_).
-        _windDirection_: Wind direction as Vector3D (default: 0, 1, 0).
+        _wind_speed: Wind speed in m/s at a the reference height (_refWindHeight_).
+        _wind_direction_: Wind direction as Vector3D (default: 0, 1, 0).
     Returns:
-        windVector: Wind Vector.
+        wind_vector: Wind Vector.
 """
 
 ghenv.Component.Name = "Butterfly_Wind Vector"
 ghenv.Component.NickName = "WindVector"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
 
-if _windSpeed and _windDirection_:
+if _wind_speed and _wind_direction_:
     try:
-        _windDirection_.Unitize()
-        windVector = _windSpeed * _windDirection_
+        _wind_direction_.Unitize()
+        wind_vector = _wind_speed * _wind_direction_
     except AttributeError:
         # dynamo
-        nv = _windDirection_.Normalized();
-        windVector = nv.Scale(_windSpeed);
+        nv = _wind_direction_.Normalized();
+        wind_vector = nv.Scale(_wind_speed);

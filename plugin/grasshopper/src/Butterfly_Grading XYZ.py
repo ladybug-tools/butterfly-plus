@@ -7,22 +7,24 @@
 # @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
 
 """
-MultiGrading
-Create a grading for multiple segmentGradings.
+Grading XYZ
+Create a grading for different XYZ.
 
 -
 
     Args:
-        _segmentGradings: A list of segmentGradings.
+        _x_grading_: X grading.
+        _y_grading_: Y grading.
+        _z_grading_: Z grading.
         
     Returns:
-        gradXYZ: A butterfly Grading. Connect this output to blockMesh component
+        grad_xyz: A butterfly Grading. Connect this output to blockMesh component
             to set grading of blockMesh in X, Y or Z direction.
 """
 
 ghenv.Component.Name = "Butterfly_Grading XYZ"
 ghenv.Component.NickName = "gradXYZ"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_26_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
@@ -33,4 +35,4 @@ except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
-gradXYZ = SimpleGrading(_xGrading_, _yGrading_, _zGrading_)
+grad_xyz = SimpleGrading(_x_grading_, _y_grading_, _z_grading_)

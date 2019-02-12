@@ -13,23 +13,24 @@ Update blockMeshDict.
 
     Args:
         _case: A butterfly case.
-        _points: A list of 8 point.
-        xAxis_: Optional vector to set xAxis for blockMeshDict (default: (1, 0, 0)).
+        _points: A list of 8 points.
+        x_axis_: Optional vector to set xAxis for blockMeshDict (default: (1, 0, 0)).
         _run: update blockMeshDict and save it folder.
     Returns:
-        readMe!: Reports, errors, warnings, etc.
+        report: Reports, errors, warnings, etc.
         case: Butterfly case.
 """
 
 ghenv.Component.Name = "Butterfly_Update blockMeshDict"
 ghenv.Component.NickName = "updateBMDict"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_21_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "4"
-if _run and _case and any(p is not None for p in _points) and xAxis_:
+
+if _run and _case and any(p is not None for p in _points) and x_axis_:
     
     _case.blockMeshDict.update_vertices(
-        tuple((p.X, p.Y, p.Z) for p in _points), (xAxis_.X, xAxis_.Y, xAxis_.Z))
+        tuple((p.X, p.Y, p.Z) for p in _points), (x_axis_.X, x_axis_.Y, x_axis_.Z))
     _case.blockMeshDict.save(_case.project_dir)
     case = _case

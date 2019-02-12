@@ -16,13 +16,12 @@ Load results for a field in probes.
         _field: Probes' filed as a string (e.g. p, U).
         
     Returns:
-        skippedPoints: List of points that are skipped during the solution.
         values: List of values for the last timestep.
 """
 
 ghenv.Component.Name = "Butterfly_Load Probes Value"
 ghenv.Component.NickName = "loadProbesValue"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_19_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "07::PostProcess"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -39,18 +38,18 @@ import os
 
 if _solution and _field:
     if isinstance(_solution, str):
-        projectDir = _solution.replace('\\\\','/').replace('\\','/')
-        probesDir = os.path.join(projectDir, 'postProcessing\\probes') 
-        rawValues = load_probe_values_from_folder(probesDir, _field)
+        project_dir = _solution.replace('\\\\','/').replace('\\','/')
+        probes_dir = os.path.join(project_dir, 'postProcessing\\probes') 
+        raw_values = load_probe_values_from_folder(probes_dir, _field)
     else:
         assert hasattr(_solution, 'load_probe_values'), \
             'Invalid Input: <{}> is not a valid Butterfly Solution.'.format(_solution)
         try:
-            rawValues = _solution.load_probe_values(_field)
+            raw_values = _solution.load_probe_values(_field)
         except Exception as e:
             raise ValueError('Failed to load values:\n\t{}'.format(e))
             
     try:
-        values = tuple(xyz_to_vector(v) for v in rawValues)
+        values = tuple(xyz_to_vector(v) for v in raw_values)
     except:
-        values = rawValues
+        values = raw_values

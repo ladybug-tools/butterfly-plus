@@ -7,21 +7,21 @@
 # @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
 
 """
-epsilonWallFunction boundary condition.
+Epsilon Wall Function boundary condition.
 
 -
     Args:
         _value: input value.
-        _Cmu_:
-        _kappa_:
-        _E_:
+        _Cmu_: model coefficient.
+        _kappa_: Von Karman constant.
+        _E_: model coefficient.
     Returns:
-        epsilonWallFunction: epsilonWallFunction boundary condition.
+        epsilon_wall_funct: Epsilon Wall Function boundary condition.
 """
 
 ghenv.Component.Name = "Butterfly_epsilonWallFunction"
 ghenv.Component.NickName = "epsilonWallFunction"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "02::BoundaryCondition"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -33,5 +33,5 @@ except ImportError as e:
     raise ImportError('{}\n{}'.format(msg, e))
 
 if _value:
-    epsilonWallFunction = EpsilonWallFunction(_value, _Cmu_, _kappa_, _E_)
+    epsilon_wall_funct = EpsilonWallFunction(_value, _Cmu_, _kappa_, _E_)
 

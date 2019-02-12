@@ -16,12 +16,12 @@ Load points from the case for preview.
         _load: Load points.
         
     Returns:
-        mesh: OpenFOAM mesh
+        pts: Points representing the vertices of the OpenFOAM mesh.
 """
 
 ghenv.Component.Name = "Butterfly_Load Points"
 ghenv.Component.NickName = "loadPoints"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "4"

@@ -7,19 +7,19 @@
 # @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
 
 """
-Set residual control convergance values
+Set residual control convergance values.
 
     Args:
-        _quantities: 
-        _values_: Residual control valeus for quantities (default: 1e-5)
+        _quantities: Quantities.
+        _values_: Residual control values for quantities (default: 1e-5)
         
     Returns:
-        residualControl: Residual Control.
+        residual_control: Residual Control.
 """
 
 ghenv.Component.Name = "Butterfly_residualControl"
 ghenv.Component.NickName = "residualControl"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "05::Recipe"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -39,7 +39,7 @@ if _quantities:
     values = (_values_[c] if c < len(_values_) else _values_[-1]
         for c, q in enumerate(_quantities))
 
-    residualControl = ResidualControl(
+    residual_control = ResidualControl(
         {key: value for (key, value) in zip(_quantities, values)}
     )
 

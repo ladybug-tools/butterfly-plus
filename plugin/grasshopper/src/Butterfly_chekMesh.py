@@ -7,7 +7,7 @@
 # @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
 
 """
-chekMesh
+Chek the metrics about the mesh.
 
 -
 
@@ -15,7 +15,7 @@ chekMesh
         _case: Butterfly case.
         _run: run chekMesh.
     Returns:
-        readMe!: Reports, errors, warnings, etc.
+        report: Reports, errors, warnings, etc.
         case: Butterfly case.
         max: Maximum mesh non-orthogonality. Use this value to update fvSchemes.
         average: Average mesh non-orthogonality.
@@ -24,7 +24,7 @@ chekMesh
 
 ghenv.Component.Name = "Butterfly_chekMesh"
 ghenv.Component.NickName = "chekMesh"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_21_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"

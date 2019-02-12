@@ -7,19 +7,19 @@
 # @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
 
 """
-kqRWallFunction boundary condition.
+kqR Wall Function boundary condition.
 
 -
     Args:
         _value: input value.
         
     Returns:
-        kqRWallFunction: kqRWallFunction boundary condition.
+        kqR_wall_funct: kqR Wall Function boundary condition.
 """
 
 ghenv.Component.Name = "Butterfly_kqRWallFunction"
 ghenv.Component.NickName = "kqRWallFunction"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "02::BoundaryCondition"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -32,4 +32,4 @@ except ImportError as e:
     raise ImportError('{}\n{}'.format(msg, e))    
 
 if _value:
-    kqRWallFunction = KqRWallFunction(_value)
+    kqR_wall_funct = KqRWallFunction(_value)

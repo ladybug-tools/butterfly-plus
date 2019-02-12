@@ -13,28 +13,29 @@ Read more about snappyHexMeshDict here:
 
 
     Args:
-        _meshQuality_: Use 0-2 to auto generate the parameters for meshQualityControls
-        _castellatedMesh_: Set to True to castellated mesh (default: True).
+        _mesh_quality_: Use 0-2 to auto generate the parameters for meshQualityControls
+        _castellated_mesh_: Set to True to castellated mesh (default: True).
         _snap_: Set to True to snap mesh to the surfaces (default: True).
-        _addLayers_: Set to True to push mesh away from surfaces and add layers (default: False).
-        _maxGlobalCells_: An intger for the maximum number of global cells (default: 2000000).
-        _surfaceFeatureLevel_: An integer for the extract features refinement. Default is None which
+        _add_layers_: Set to True to push mesh away from surfaces and add layers (default: False).
+        _n_cells_btwn_levels_: Number of cells between levels.
+        _max_global_cells_: An intger for the maximum number of global cells (default: 2000000).
+        _srf_feature_level_: An integer for the extract features refinement. Default is None which
             means implicit meshing feature will be used.
-        _expansionRatio_: Layers expansion ration (default: 1.1)
-        _finalLayerThickness_: Thickness of final layer (default: 0.7)
-        _minThickness_: Minimum thickness for layers (default: 0.1).
-        _nLayerIter_: Overall max number of layer addition iterations. The mesher
+        _expansion_ratio_: Layers expansion ration (default: 1.1)
+        _final_layer_thickness_: Thickness of final layer (default: 0.7)
+        _min_thickness_: Minimum thickness for layers (default: 0.1).
+        _n_layer_iter_: Overall max number of layer addition iterations. The mesher
             will exit if it reaches this number of iterations; possibly with an
             illegal mesh (default: 50).
-        additionalParameters_: Additional parameters as a valid c++ dictionary. Additional values
+        additional_par_: Additional parameters as a valid c++ dictionary. Additional values
             will overwrite the values from the other inputs above.
     Returns:
-        snappyHexMeshDict: Butterfly snappyHexMeshDict.
+        snappy_hex_mesh_dict: Butterfly snappyHexMeshDict.
 """
 
 ghenv.Component.Name = "Butterfly_snappyHexMeshDict"
 ghenv.Component.NickName = "snappyHexMeshDict"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_19_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -47,32 +48,32 @@ except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
-if _meshQuality_:
+if _mesh_quality_:
     raise NotImplementedError('MeshQuality is not implemented yet. It will be added soon.')
 
-values = {'castellatedMesh': str(_castellatedMesh_).lower(),
-          'snap': str(_snap_).lower(), 'addLayers': str(_addLayers_).lower(),
+values = {'castellatedMesh': str(_castellated_mesh_).lower(),
+          'snap': str(_snap_).lower(), 'addLayers': str(_add_layers_).lower(),
           'castellatedMeshControls': {
-            'nCellsBetweenLevels': str(_nCellsBetweenLevels_),
-            'maxGlobalCells': str(_maxGlobalCells_)
+            'nCellsBetweenLevels': str(_n_cells_btwn_levels_),
+            'maxGlobalCells': str(_max_global_cells_)
             },
            'addLayersControls': {
-                'expansionRatio': str(_expansionRatio_),
-                'finalLayerThickness': str(_finalLayerThickness_),
-                'minThickness': str(_minThickness_),
-                'nLayerIter': str(_nLayerIter_)}
+                'expansionRatio': str(_expansion_ratio_),
+                'finalLayerThickness': str(_final_layer_thickness_),
+                'minThickness': str(_min_thickness_),
+                'nLayerIter': str(_n_layer_iter_)}
           }
 
-if _surfaceFeatureLevel_ is not None:
-    values['snapControls'] = {'extractFeaturesRefineLevel': str(_surfaceFeatureLevel_)}
+if _srf_feature_level_ is not None:
+    values['snapControls'] = {'extractFeaturesRefineLevel': str(_srf_feature_level_)}
 
-if additionalParameters_:
+if additional_par_:
     try:
-        addedValues = CppDictParser(additionalParameters_).values
+        addedValues = CppDictParser(additional_par_).values
     except Exception as e:
-        raise ValueError("Failed to load additionalParameters_:\n%s" % str(e))
+        raise ValueError("Failed to load additional_par_:\n%s" % str(e))
     else:
         values = update_dict(values, addedValues)
 
-snappyHexMeshDict = SolutionParameter('snappyHexMeshDict', values)
+snappy_hex_mesh_dict = SolutionParameter('snappyHexMeshDict', values)
 

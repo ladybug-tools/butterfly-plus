@@ -12,22 +12,22 @@ Steady Incompressible Recipe.
 -
 
     Args:
-        _turbulenceProp_: Turbulence properties. This values will overwrite default
+        _turbulence_prop_: Turbulence properties. This values will overwrite default
             values, and can be updated while the solution is running.
-        fvSchemes_: Optional input for fvSchemes to overwrite default fvSchemes.
-        fvSolution_: Optional input for fvSolution to overwrite default fvSolution.
-        residualControl_: residualControl values. This values will overwrite default
+        fv_schemes_: Optional input for fvSchemes to overwrite default fvSchemes.
+        fv_solution_: Optional input for fvSolution to overwrite default fvSolution.
+        residual_control_: residualControl values. This values will overwrite default
             values, and can be updated while the solution is running.
-        _relaxationFactors_: relaxationFactors. This values will overwrite default
+        _relaxation_factors_: relaxationFactors. This values will overwrite default
             values, and can be updated while the solution is running.
     Returns:
-        readMe!: Reports, errors, warnings, etc.
+        report: Reports, errors, warnings, etc.
         case: Butterfly case.
 """
 
 ghenv.Component.Name = "Butterfly_Steady Incompressible Recipe"
 ghenv.Component.NickName = "SteadyIncomp"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_21_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "05::Recipe"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -38,5 +38,5 @@ except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
-recipe = SteadyIncompressible(_turbulenceProp_, fvSchemes_, fvSolution_,
-                              residualControl_, _relaxationFactors_)
+recipe = SteadyIncompressible(_turbulence_prop_, fv_schemes_, fv_solution_,
+                              residual_control_, _relaxation_factors_)

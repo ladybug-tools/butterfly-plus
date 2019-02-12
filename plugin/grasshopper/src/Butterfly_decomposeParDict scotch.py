@@ -12,14 +12,14 @@ Scotch decomposeParDict. Dictionary for parallel runs.
 -
 
     Args:
-        _numOfCpus_: Number of cpus (default: 2).
+        _num_of_cpus_: Number of cpus (default: 2).
     Returns:
-        decomposeParDict: decomposeParDict.
+        decompose_par_dict: decomposeParDict.
 """
 
 ghenv.Component.Name = "Butterfly_decomposeParDict scotch"
 ghenv.Component.NickName = "decomposeParDict_scotch"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "08::Etc"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -32,8 +32,8 @@ except ImportError as e:
 
 
 try:
-    numberOfSubdomains = int(_numOfCpus_)
+    numberOfSubdomains = int(_num_of_cpus_)
 except:
     numberOfSubdomains = 2
 
-decomposeParDict = DecomposeParDict.scotch(numberOfSubdomains)
+decompose_par_dict = DecomposeParDict.scotch(numberOfSubdomains)

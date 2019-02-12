@@ -14,25 +14,27 @@ Run recipes using OpenFOAM.
     Args:
         _case: A Butterfly case.
         _recipe: A Butterfly recipe.
-        decomposeParDict_: decomposeParDict for parallel run. By default solution
+        decompose_par_dict_: decomposeParDict for parallel run. By default solution
             runs in serial.
-        solutionParams_: Butterfly solutionParams. These parameters can be edited
+        solution_par_: Butterfly solutionParams. These parameters can be edited
             while the analysis is running. Ensure to use valid values. Butterfly
             does not check the input values for accuracy.
-        residualQuantities_: Residual quantities. If empty recipe's quantities
-            will be used.
         _interval_: Time interval for updating solution in Grasshopper in seconds.
             (default: 2 seconds)
         _write_: Write changes to folder.
         _run: start running the solution.
     Returns:
-        readMe!: Reports, errors, warnings, etc.
-        case: Butterfly case.
+        report: Reports, errors, warnings, etc.
+        is_running: Boolean to note whether the simulation is running.
+        timestep: Iteration count of the simulation.
+        residual_fields: The names of the residual fields.
+        residual_values: The values for each of the residual fields noted above.
+        log_files: File path to the log file for the simulation
 """
 
 ghenv.Component.Name = "Butterfly_Solution"
 ghenv.Component.NickName = "solution"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "06::Solution"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -57,13 +59,13 @@ if _case and _recipe and _write:
         if uniqueKey not in sticky:
             # solution hasn't been created or has been removed
             # create a new one and copy it to sticky
-            solution = Solution(_case, _recipe, decomposeParDict_, solutionParams_)
-            residualFields = solution.residual_fields
+            solution = Solution(_case, _recipe, decompose_par_dict_, solution_par_)
+            residual_fields = solution.residual_fields
             # pass solution parameter to __init__
             sticky[uniqueKey] = solution
             if run_:
                 timestep = solution.timestep
-                solution.update_solution_params(solutionParams_, timestep)
+                solution.update_solution_params(solution_par_, timestep)
                 if _interval_ < 0:
                     # wait for the run to be done
                     solution.run(wait=True)
@@ -72,17 +74,17 @@ if _case and _recipe and _write:
         else:
             # solution is there so just load it
             solution = sticky[uniqueKey]
-            residualFields = solution.residual_fields
+            residual_fields = solution.residual_fields
     
-        isRunning = solution.is_running
+        is_running = solution.is_running
         info = solution.info
         timestep = info.timestep
-        residualValues = info.residualValues
-        if run_ and isRunning:
+        residual_values = info.residual_values
+        if run_ and is_running:
             print 'running...'
             # update parameters if there has been changes.
             solution.update_from_recipe(_recipe)
-            solution.update_solution_params(solutionParams_, timestep)
+            solution.update_solution_params(solution_par_, timestep)
             gh_component_timer(ghenv.Component, interval=_interval_*1000)
         else:
             # analysis is over
@@ -110,5 +112,5 @@ if _case and _recipe and _write:
         import traceback
         print(traceback.format_exc())
     if solution:
-        logFiles = solution.log_files or os.path.join(_case.project_dir,
-                                                      _recipe.log_file)
+        log_files = solution.log_files or os.path.join(_case.project_dir,
+                                                       _recipe.log_file)

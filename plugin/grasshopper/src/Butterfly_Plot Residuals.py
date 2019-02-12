@@ -15,25 +15,25 @@ Load residual values for a case.
         _recipe: A Butterfly recipe.
         _rect: A rectangle for boundary chart.
         _fields_: Residual fields. If empty solution's fields will be used.
-        _targetRes_: Residential number that will be added to the graph as a black line.
+        _target_res_: Residential number that will be added to the graph as a black line.
             (default: 1e-4).
-        timeRange_: timeRange for loading residuals as a domain.
+        time_range_: Time range for loading residuals as a domain.
         method_: Method of ploting the values (0..1). 0: Curves, 1: Colored mesh
             If you're updating the values frequently use method 1 which is the
             quicker method.
-        _plot: Set to True to plot the chart.
+        _load: Set to True to plot the chart.
     Returns:
-        readMe!: Reports, erros, warnings, etc.
-        timeRange: Total time range.
+        report: Reports, erros, warnings, etc.
+        time_range: Total time range.
         curves: Lines as curves.
         meshes: Lines as meshes.
-        residualLine: Residual line.
+        residual_line: Residual line.
         colors: List of colors for meshes to color text, etc.
 """
 
 ghenv.Component.Name = "Butterfly_Plot Residuals"
 ghenv.Component.NickName = "plotResiduals"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_21_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "07::PostProcess"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -107,11 +107,11 @@ def main():
     for f in fields:
         print f
     
-    timeRange = '{} To {}'.format(*p.time_range)
+    time_range = '{} To {}'.format(*p.time_range)
     
     # calculate curves
     crvs = tuple(rc.Geometry.PolylineCurve(rc.Geometry.Point3d(c, float(i), 0)
-        for c, i in enumerate(p.get_residuals(field, timeRange_)))
+        for c, i in enumerate(p.get_residuals(field, time_range_)))
         for field in fields)
         
     # find bounding box for curves
@@ -121,7 +121,7 @@ def main():
         bbox = rc.Geometry.BoundingBox.Union(bbox, crv.GetBoundingBox(True))
     
     # create residual line
-    startPt = rc.Geometry.Point3d(0, _targetRes_, 0)
+    startPt = rc.Geometry.Point3d(0, _target_res_, 0)
     length = bbox.Max[0] - bbox.Min[0]
     resLine = rc.Geometry.Line(startPt, rc.Geometry.Vector3d(length, 0, 0)).ToNurbsCurve()
     bbox = rc.Geometry.BoundingBox.Union(bbox, resLine.GetBoundingBox(True))
@@ -139,15 +139,15 @@ def main():
     colors = tuple(Color.FromArgb(*rgb) for rgb in cs3)
 
     if method_ % 2:
-        residualLine = coloredMeshFromCurve(resLine, width=_lineWidth_,
-                                            colors=[Color.Black])
+        residual_line = coloredMeshFromCurve(resLine, width=_lineWidth_,
+                                             colors=[Color.Black])
         
         meshes = coloredMeshFromCurve(curves,  width=_lineWidth_,
                                               colors= colors)
         
-        return timeRange, curves, meshes, residualLine, colors[:len(curves)]
+        return time_range, curves, meshes, residual_line, colors[:len(curves)]
     
-    return timeRange, curves, [], resLine, colors[:len(curves)]
+    return time_range, curves, [], resLine, colors[:len(curves)]
 
 if _solution and _rect and _load:
     try:
@@ -159,7 +159,7 @@ if _solution and _rect and _load:
         )
         
     if output:
-        timeRange, curves, meshes, residualLine, colors = output
+        time_range, curves, meshes, residual_line, colors = output
 
 if method_ % 2:
     ghenv.Component.Params.Output[3].Name = 'meshes'

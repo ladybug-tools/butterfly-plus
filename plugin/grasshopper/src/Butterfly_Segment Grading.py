@@ -14,18 +14,18 @@ or length.
 -
 
     Args:
-        _percentageLength: Percentage of length of the block.
-        _percentageCells: Percentage of cells to be included in this segment.
-        _expansionRatio_: Expansion ration in this segment (default: 1).
+        _percentage_length: Percentage of length of the block.
+        _percentage_cells: Percentage of cells to be included in this segment.
+        _expansion_ratio_: Expansion ration in this segment (default: 1).
         
     Returns:
-        segmentGrading: A segment grading. Use MultiGrading component to create
+        segment_grading: A segment grading. Use MultiGrading component to create
             a grading.
 """
 
 ghenv.Component.Name = "Butterfly_Segment Grading"
 ghenv.Component.NickName = "segGrading"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
@@ -36,5 +36,5 @@ except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
-if _percentageLength and _percentageCells:
-    segmentGrading = Grading(_percentageLength, _percentageCells, _expansionRatio_)
+if _percentage_length and _percentage_cells:
+    segment_grading = Grading(_percentage_length, _percentage_cells, _expansion_ratio_)

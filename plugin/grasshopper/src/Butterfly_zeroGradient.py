@@ -7,16 +7,16 @@
 # @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
 
 """
-zeroGradient boundary condition.
+Zero gradient boundary condition.
 
 -
     Returns:
-        zeroGradient: zeroGradient boundary condition.
+        zero_gradient: Zero Gradient boundary condition.
 """
 
 ghenv.Component.Name = "Butterfly_zeroGradient"
 ghenv.Component.NickName = "zeroGradient"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "02::BoundaryCondition"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -27,5 +27,5 @@ except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
-zeroGradient = ZeroGradient()
+zero_gradient = ZeroGradient()
 

@@ -13,25 +13,28 @@ Read more: http://cfd.direct/openfoam/user-guide/turbulence/
 Watch this: https://www.youtube.com/watch?v=Eu_4ppppQmw
 
     Args:
-        _RASModel_: Name of RAS turbulence model (default: RNGkEpsilon).
-            Incompressible RAS turbulence models.
+        _RAS_model_: Name of RAS turbulence model (default: RNGkEpsilon).
+            Incompressible RAS turbulence models:
                 LRR, LamBremhorstKE, LaunderSharmaKE, LienCubicKE,
                 LienLeschziner, RNGkEpsilon, SSG, ShihQuadraticKE,
                 SpalartAllmaras, kEpsilon, kOmega, kOmegaSSTSAS, kkLOmega,
                 qZeta, realizableKE, v2f
-            Compressible RAS turbulence models.
+            Compressible RAS turbulence models:
                 LRR, LaunderSharmaKE, RNGkEpsilon, SSG, SpalartAllmaras,
                 buoyantKEpsilon, kEpsilon, kOmega, kOmegaSSTSAS,
                 realizableKE, v2f
         _turbulence_: Boolean switch to turn the solving of turbulence
             modelling on/off (default: True).
-        _printCoeffs_: Boolean switch to print model coeffs to terminal at
+        _print_coeffs_: Boolean switch to print model coeffs to terminal at
             simulation start up (default: True).
+    
+    Returns:
+        RAS: Reynolds-averaged simulation (RAS) turbulence model.
 """
 
 ghenv.Component.Name = "Butterfly_RAS Turbulence Model"
 ghenv.Component.NickName = "RAS"
-ghenv.Component.Message = 'VER 0.0.04\nAUG_22_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "04::Turbulence"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -43,4 +46,4 @@ except ImportError as e:
     raise ImportError('{}\n{}'.format(msg, e))
 
 
-RAS = TurbulenceProperties.RAS(_RASModel_, _turbulence_, _printCoeffs_)
+RAS = TurbulenceProperties.RAS(_RAS_model_, _turbulence_, _print_coeffs_)

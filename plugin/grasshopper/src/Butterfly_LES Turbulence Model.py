@@ -13,25 +13,28 @@ Read more: http://cfd.direct/openfoam/user-guide/turbulence/
 Watch this: https://www.youtube.com/watch?v=Eu_4ppppQmw
 
     Args:
-        _LESModel_: Name of LES turbulence model.
-            Incompressible LES turbulence models.
+        _LES_model_: Name of LES turbulence model.
+            Incompressible LES turbulence models:
                 DeardorffDiffStress, Smagorinsky, SpalartAllmarasDDES,
                 SpalartAllmarasDES, SpalartAllmarasIDDES, WALE, dynamicKEqn,
                 dynamicLagrangian, kEqn, kOmegaSSTDES
-            Compressible LES turbulence models.
+            Compressible LES turbulence models:
                 DeardorffDiffStress, Smagorinsky, SpalartAllmarasDDES,
                 SpalartAllmarasDES, SpalartAllmarasIDDES, WALE, dynamicKEqn,
                 dynamicLagrangian, kEqn, kOmegaSSTDES
         _delta_: Name of delta model.
         _turbulence_: Boolean switch to turn the solving of turbulence
             modelling on/off (default: True).
-        _printCoeffs_: Boolean switch to print model coeffs to terminal at
+        _print_coeffs_: Boolean switch to print model coeffs to terminal at
             simulation start up (default: True).
+    
+    Returns:
+        LES: Large eddy simulation (LES) model.
 """
 
 ghenv.Component.Name = "Butterfly_LES Turbulence Model"
 ghenv.Component.NickName = "LES"
-ghenv.Component.Message = 'VER 0.0.04\nAUG_22_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "04::Turbulence"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -43,4 +46,4 @@ except ImportError as e:
     raise ImportError('{}\n{}'.format(msg, e))
 
 
-LES = TurbulenceProperties.LES(_LESModel_, _delta_, _turbulence_, _printCoeffs_)
+LES = TurbulenceProperties.LES(_LES_model_, _delta_, _turbulence_, _print_coeffs_)

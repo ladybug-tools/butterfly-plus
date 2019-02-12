@@ -14,16 +14,16 @@ Butterfly refinement range.
     Args:
         _geo: Grasshopper geometries.
         _name: Surface name.
-        _refMode: Refinement mode. Used locationRefMode or distanceRefMode components.
-        _meshSet_: Grasshopper mesh settings.
+        _ref_mode: Refinement mode. Used locationRefMode or distanceRefMode components.
+        _mesh_set_: Grasshopper mesh settings.
     Returns:
-        readMe!: Reports, errors, warnings, etc.
-        refinementRegion: A Buttefly refinement region.
+        report: Reports, errors, warnings, etc.
+        ref_region: A Buttefly refinement region.
 """
 
 ghenv.Component.Name = "Butterfly_Refinement Region"
 ghenv.Component.NickName = "refinementRegion"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "4"
@@ -34,5 +34,5 @@ except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
-if _geo and _name and _refMode:
-    refinementRegion = RefinementRegionGH(_name, _geo, _refMode, _meshSet_)
+if _geo and _name and _ref_mode:
+    ref_region = RefinementRegionGH(_name, _geo, _ref_mode, _mesh_set_)

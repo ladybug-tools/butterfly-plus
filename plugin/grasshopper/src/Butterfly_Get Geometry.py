@@ -12,16 +12,16 @@ Update fvSchemes values based on mesh orthogonalities.
 -
 
     Args:
-        _BFObjects: A list of butterfly objects.
+        _BF_objs: A list of butterfly objects.
         colors_: Optional input for colors to 
     Returns:
-        readMe!: Reports, errors, warnings, etc.
+        report: Reports, errors, warnings, etc.
         geometries: List of geometries as meshes.
 """
 
 ghenv.Component.Name = "Butterfly_Get Geometry"
 ghenv.Component.NickName = "getGeometry"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "08::Etc"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -44,8 +44,8 @@ def get_geometry(obj):
         except AttributeError:
             print '{} has no geometry!'.format(type(obj))
 
-if _BFObjects:
-    geo = chain.from_iterable(get_geometry(obj) for obj in _BFObjects)
+if _BF_objs:
+    geo = chain.from_iterable(get_geometry(obj) for obj in _BF_objs)
     
     try:
         geo = tuple(geo)

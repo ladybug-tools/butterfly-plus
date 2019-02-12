@@ -10,17 +10,17 @@
 Solution Parameters.
 
     Args:
-        controlDict_: controlDict.
+        control_dict_: controlDict.
         residualControl_: residualControl.
         probes_: probes.
-        additionalParams_: List of solution parameters. Use solutionParameter
-            component to create solutionParams.
+        additional_par_: List of solution parameters. Use solutionParameter
+            component to create solution_par.
     Returns:
-        solutionParams: A list of solution parameters.
+        solution_par: A list of solution parameters.
 """
 ghenv.Component.Name = "Butterfly_Solution Parameters"
 ghenv.Component.NickName = "solutionParams"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_19_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "06::Solution"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -31,14 +31,14 @@ except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
-if controlDict_:
-    controlDict_ = SolutionParameter.from_cpp_dictionary('controlDict', str(controlDict_))
+if control_dict_:
+    control_dict_ = SolutionParameter.from_cpp_dictionary('controlDict', str(control_dict_))
 
 if probes_:
     probes_ = SolutionParameter.from_cpp_dictionary('probes', str(probes_))
 
 
-params = [controlDict_, probes_] + additionalParams_
+params = [control_dict_, probes_] + additional_par_
 
-solutionParams = (p for p in params if p)
+solution_par = (p for p in params if p)
 

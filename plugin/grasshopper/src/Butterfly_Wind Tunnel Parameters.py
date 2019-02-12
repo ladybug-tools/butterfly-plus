@@ -12,18 +12,18 @@ Wind tunnel parameters.
 -
 
     Args:
-        _windwardX_: Multiplier value for windward extension (default: 3).
-        _topX_: Multiplier value for top extension (default: 5).
-        _sideX_: Multiplier value for side extension (default: 5).
-        _leewardX_: Multiplier value for leeward extension (default: 15).
+        _windward_x_: Multiplier value for windward extension (default: 3).
+        _top_x_: Multiplier value for top extension (default: 5).
+        _sides_x_: Multiplier value for side extension (default: 5).
+        _leeward_x_: Multiplier value for leeward extension (default: 15).
     Returns:
-        readMe!: Reports, errors, warnings, etc.
-        tunnelParams: Tunnel Parameters
+        report: Reports, errors, warnings, etc.
+        tunnel_params: Tunnel Parameters
 """
 
 ghenv.Component.Name = "Butterfly_Wind Tunnel Parameters"
 ghenv.Component.NickName = "tunnelParams"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_21_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
@@ -34,4 +34,4 @@ except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
-tunnelParams = TunnelParameters(_windwardX_, _topX_, _sidesX_, _leewardX_)
+tunnel_params = TunnelParameters(_windward_x_, _top_x_, _sides_x_, _leeward_x_)

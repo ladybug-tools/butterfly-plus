@@ -17,12 +17,12 @@ Distance refinement.
             surface the wanted refinement level.
         
     Returns:
-        distanceRefMode: Refinement mode.
+        distance_ref_mode: Refinement mode.
 """
 
 ghenv.Component.Name = "Butterfly_DistanceRefinementMode"
 ghenv.Component.NickName = "distRefMode"
-ghenv.Component.Message = 'VER 0.0.04\nDEC_10_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "5"
@@ -36,4 +36,4 @@ except ImportError as e:
 _level = [(round(i[0], 4), int(i[1])) for i in _levels]
 
 if _level:
-    distanceRefMode = Distance(_level)
+    distance_ref_mode = Distance(_level)

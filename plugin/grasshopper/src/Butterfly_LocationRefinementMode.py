@@ -17,12 +17,12 @@ Inside/Ouside region refinement.
             refined up to the level. The surface needs to be closed for this to
             be possible.
     Returns:
-        locationRefMode: Refinement mode.
+        location_ref_mode: Refinement mode.
 """
 
 ghenv.Component.Name = "Butterfly_LocationRefinementMode"
 ghenv.Component.NickName = "inOUTRefMode"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "5"
@@ -35,6 +35,6 @@ except ImportError as e:
 
 if _level:
     if not _mode_:
-        locationRefMode = Inside(_level)
+        location_ref_mode = Inside(_level)
     else:
-        locationRefMode = Outside(_level)
+        location_ref_mode = Outside(_level)

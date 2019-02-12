@@ -7,7 +7,7 @@
 # @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
 
 """
-Large eddy simulation (LES) modelling.
+Laminar turbulence modelling.
 
 Read more: http://cfd.direct/openfoam/user-guide/turbulence/
 Watch this: https://www.youtube.com/watch?v=Eu_4ppppQmw
@@ -17,8 +17,8 @@ Watch this: https://www.youtube.com/watch?v=Eu_4ppppQmw
 """
 
 ghenv.Component.Name = "Butterfly_Laminar Turbulence Model"
-ghenv.Component.NickName = "leminar"
-ghenv.Component.Message = 'VER 0.0.04\nAUG_22_2017'
+ghenv.Component.NickName = "laminar"
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "04::Turbulence"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"

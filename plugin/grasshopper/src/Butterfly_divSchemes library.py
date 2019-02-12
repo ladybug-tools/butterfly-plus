@@ -11,20 +11,20 @@ Generate fvSchemes based on mesh non-orthogonalities.
 
 -
     Args:
-        _quality: Solution quality [0..1]. The quality 0 generates divSchemes
+        _quality: Solution quality [0..1]. The quality 0 generates div_schemes
             which is less accurate but more stable. The quality 1 generates a
-            divSchemes that are more accurate but less stable. You can start with
+            div_schemes that are more accurate but less stable. You can start with
             quality 0 and then change it to quality 1 when the solution is
             converging.
     Returns:
         readMe!: Reports, errors, warnings, etc.
-        divSchemes: Recommended divSchemes. Use solution parameter to update
+        div_schemes: Recommended div schemes. Use solution parameter to update
             fvSchemes for the solution.
 """
 
 ghenv.Component.Name = "Butterfly_divSchemes library"
 ghenv.Component.NickName = "genDivSchemes"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "08::Etc"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
@@ -36,5 +36,5 @@ except ImportError as e:
     raise ImportError('{}\n{}'.format(msg, e))
 
 if _quality is not None:
-    divSchemes = FvSchemes.divSchemesCollector[_quality%2]
+    div_schemes = FvSchemes.divSchemesCollector[_quality%2]
 

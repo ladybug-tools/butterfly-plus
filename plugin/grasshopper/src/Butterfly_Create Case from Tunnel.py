@@ -13,12 +13,13 @@ Create Case from wind tunnel.
 
     Args:
         _name: Project name.
-        _BFGeometries: List of butterfly geometries that will be inside the tunnel.
-        _windVector: A vector that indicates speed and direction of wind. Length
+        _BF_geo: List of butterfly geometries that will be inside the tunnel.
+        ref_regions_: A list of refinement regions.
+        _wind_vector: A vector that indicates speed and direction of wind. Length
             of the vector will be used as windspeed and the unfied vector will be
             used for wind direction. For wind tunnel vector will be projected to
             XY plane.
-        _refWindHeight_: Reference height for wind velocity (default: 10m).
+        _ref_wind_height_: Reference height for wind velocity (default: 10m).
         _landscape_: An integer between 0-7 to calculate z0 (roughness).
             You can find full description of the landscape in Table I at this
             link (onlinelibrary.wiley.com/doi/10.1002/met.273/pdf)
@@ -61,27 +62,24 @@ Create Case from wind tunnel.
             7 > '2.0'     # chaotic. City centres with mixture of low-rise and
             high-rise buildings, or large forests of irregular height with many
             clearings.
-        make2dParams_: Butterfly parameters to make a 2d wind tunnel.
-        _tunnelParams_: Butterfly tunnel parameters.
+        make_2d_params_: Butterfly parameters to make a 2d wind tunnel.
+        _tunnel_params_: Butterfly tunnel parameters.
         _run: Create wind tunnel case from inputs.
     Returns:
-        readMe!: Reports, errors, warnings, etc.
-        pts: Wind tunnel corners for visualization.
+        report: Reports, errors, warnings, etc.
+        block_pts: Points showing the corners of the wind tunnel (for visualization).
+        wind_tunnel: Butterfly wind tunnel.
         case: Butterfly case.
 """
 
 ghenv.Component.Name = "Butterfly_Create Case from Tunnel"
 ghenv.Component.NickName = "createCaseFromTunnel"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_25_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
 
 
-#import butterfly
-#import butterfly_grasshopper
-#reload(butterfly.windtunnel)
-#reload(butterfly_grasshopper.windtunnel)
 try:
     from butterfly_grasshopper.windtunnel import WindTunnelGH
     from butterfly_grasshopper.geometry import xyz_to_point
@@ -95,14 +93,14 @@ def main():
     _meshParams_ = None
     
     wt = WindTunnelGH.from_geometries_wind_vector_and_parameters(
-        _name, _BFGeometries, _windVector, _tunnelParams_, _landscape_,
-        _meshParams_, _refWindHeight_)
+        _name, _BF_geo, _wind_vector, _tunnel_params_, _landscape_,
+        _meshParams_, _ref_wind_height_)
         
-    for region in refRegions_:
+    for region in ref_regions_:
         wt.add_refinementRegion(region)
     
     # save with overwrite set to False. User can clean the folder using purge if they need to.
-    case = wt.save(overwrite=(_run + 1) % 2, make2d_parameters=make2dParams_)
+    case = wt.save(overwrite=(_run + 1) % 2, make2d_parameters=make_2d_params_)
     
     print "Wind tunnel dimensions: {}, {} and {}".format(
         case.blockMeshDict.width, case.blockMeshDict.length, case.blockMeshDict.height)
@@ -111,6 +109,6 @@ def main():
 
     return wt, pts, case
 
-if _run and _name and _BFGeometries and _windVector:
-        windTunnel, pts, case = main()
+if _run and _name and _BF_geo and _wind_vector:
+        wind_tunnel, block_pts, case = main()
 

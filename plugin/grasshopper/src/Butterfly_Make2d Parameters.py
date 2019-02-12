@@ -15,12 +15,13 @@ Make a case 2d.
         _normal: Normal direction for the cutting plane as a vector.
         _width_: Width of 2d case (default: 0.5)
     Returns:
-        make2dParams: Parameters for creating a 2d case.
+        report: Reports, errors, warnings, etc.
+        make_2d_params: Parameters for creating a 2d case.
 """
 
 ghenv.Component.Name = "Butterfly_Make2d Parameters"
 ghenv.Component.NickName = "make2dParams"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "4"
@@ -34,10 +35,10 @@ except ImportError as e:
 # create blockMeshDict based on BBox
 if _origin and _normal:
     try:
-        make2dParams = Make2dParameters(_origin, _normal, _width_)
+        make_2d_params = Make2dParameters(_origin, _normal, _width_)
     except TypeError:
         # DynamoBIM
-        make2dParams = Make2dParameters(
+        make_2d_params = Make2dParameters(
             (_origin.X, _origin.Y, _origin.Z),
             (_normal.X, _normal.Y, _normal.Z),
             _width_)

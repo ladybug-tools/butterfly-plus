@@ -10,21 +10,21 @@
 Set parameters for runDict
 
     Args:
-        _startTime_: Start timestep (default: 0)
-        _endTime_: End timestep (default: 1000)
-        _writeInterval_: Number of intervals between writing the results (default: 100)
-        _writeCompression_: Set to True if you want the results to be compressed
+        _start_time_: Start timestep (default: 0)
+        _end_time_: End timestep (default: 1000)
+        _write_interval_: Number of intervals between writing the results (default: 100)
+        _write_compression_: Set to True if you want the results to be compressed
             before being written to your machine (default: False).
-        _purgeWrite_: Number of results folder to be kept. 0 means that all the
+        _purge_write_: Number of results folder to be kept. 0 means that all the
             result folder will be kept (default: 0).
-        funcObjects_: A list of OpenFOAM function objects. Use functionObject
+        func_objects_: A list of OpenFOAM function objects. Use functionObject
             component to create a butterfly function object from a cpp dictionary.
     Returns:
-        controlDict: Butterfly controlDict.
+        control_dict: Butterfly control dictionary.
 """
 ghenv.Component.Name = "Butterfly_controlDict"
 ghenv.Component.NickName = "controlDict"
-ghenv.Component.Message = 'VER 0.0.04\nMAR_14_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "06::Solution"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -37,22 +37,22 @@ except ImportError as e:
 
 
 cd = ControlDict()
-if _startTime_ is not None:
-    cd.startTime = _startTime_
+if _start_time_ is not None:
+    cd.startTime = _start_time_
 
-if _endTime_ is not None:
-    cd.endTime = _endTime_
+if _end_time_ is not None:
+    cd.endTime = _end_time_
 
-if _writeInterval_ is not None:
-    cd.writeInterval = _writeInterval_
+if _write_interval_ is not None:
+    cd.writeInterval = _write_interval_
 
-if _writeCompression_ is not None:
-    cd.writeCompression = _writeCompression_
+if _write_compression_ is not None:
+    cd.writeCompression = _write_compression_
 
-if _purgeWrite_ is not None:
-    cd.purgeWrite = _purgeWrite_
+if _purge_write_ is not None:
+    cd.purgeWrite = _purge_write_
 
-if funcObjects_ and funcObjects_[0] is not None:
-    cd.functions = funcObjects_
+if func_objects_ and func_objects_[0] is not None:
+    cd.functions = func_objects_
 
-controlDict = cd
+control_dict = cd

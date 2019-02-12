@@ -15,12 +15,12 @@ Load results for a field in probes.
         _solution: A Butterfly solution.
         
     Returns:
-        skippedPoints: List of points that are skipped during the solution.
+        skipped_probes: List of points that are skipped during the solution.
 """
 
 ghenv.Component.Name = "Butterfly_Load Skipped Probes"
 ghenv.Component.NickName = "loadSkippedProbes"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "07::PostProcess"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -39,6 +39,6 @@ if _solution:
     except AttributeError:
         raise ValueError('{} is not a butterfly Solution.'.format(_solution))
     try:
-        skippedProbes = tuple(xyz_to_point(v) for v in pts)
+        skipped_probes = tuple(xyz_to_point(v) for v in pts)
     except:
-        skippedProbes = pts
+        skipped_probes = pts

@@ -13,29 +13,30 @@ This component generates gradingXYZ for an outdoor study (wind tunnel).
 -
 
     Args:
-        _windTunnel: windTunnel iput from create case from tunnel component.
-        _cellSize_: Cell size for the area of interest (default: 1).
-        _cellToCellRatio_: Cell to cell expansion ratio (default: 1.2).
-        wakeOffset_: The length to be added to the end of geometries bounding
+        _wind_tunnel: windTunnel iput from create case from tunnel component.
+        _cell_size_: Cell size for the area of interest (default: 1).
+        _cell_to_cell_ratio_: Cell to cell expansion ratio (default: 1.2).
+        wake_offset_: The length to be added to the end of geometries bounding
             box to be considerd as part of area of interest (default: 2).
-        heightOffset_: The length to be added to the topic of geometries bounding
+        height_offset_: The length to be added to the topic of geometries bounding
             box to be considerd as part of area of interest (default: 5).        
-        areaOfInterest_: Remove current snappyHexMesh folders from the case if any (default: True). 
+        area_of_interest_: Remove current snappyHexMesh folders from the case if any (default: True). 
     Returns:
-        readMe!: Reports, errors, warnings, etc.
-        gradXYZ: A butterfly Grading. Connect this output to gradXYZ in blockMesh
+        report: Reports, errors, warnings, etc.
+        grad_xyz: A butterfly Grading. Connect this output to grad_xyz in blockMesh
             component to set the grading of blockMesh in X, Y or Z direction.
-        cellCount: Number of cells in XYZ directions. Connect this output to
+        cell_count_xyz: Number of cells in XYZ directions. Connect this output to
             cellCount in blockMesh component to set the cell count of blockMesh
             in X, Y or Z direction.
-        preview: An approximation of blockMesh based on gradXYZ and cellCount.
+        cell_count_tot: Number of total cells.
+        preview: An approximation of blockMesh based on grad_xyz and cellCount.
             For accurate mesh visualization run blockMesh and visualize the
             output mesh [To be implemented!].
 """
 
 ghenv.Component.Name = "Butterfly_wind Tunnel Grading"
 ghenv.Component.NickName = "WTGrading"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_09_2018'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "3"
@@ -46,14 +47,14 @@ except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
-if _windTunnel:
-    if areaOfInterest_:
+if _wind_tunnel:
+    if area_of_interest_:
         raise NotImplementedError(
           '\nArea of interest is not implemented yet!\nThis component uses '
           'geometry bounding box as the area of interest.\n'
           'You can use offset inputs to adjust the current bounding box.'
         )
-    gradXYZ, cell_count = _windTunnel.calculate_grading(
-        _cellSize_[0], _cellToCellRatio_[0], wakeOffset_, heightOffset_)
-    cellCountXYZ = xyz_to_point(cell_count)
-    cellCountTot = int(cellCountXYZ.X * cellCountXYZ.Y * cellCountXYZ.Z)
+    grad_xyz, cell_count = _wind_tunnel.calculate_grading(
+        _cell_size_[0], _cell_to_cell_ratio_[0], wake_offset_, height_offset_)
+    cell_count_xyz = xyz_to_point(cell_count)
+    cell_count_tot = int(cell_count_xyz.X * cell_count_xyz.Y * cell_count_xyz.Z)

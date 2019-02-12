@@ -13,27 +13,23 @@ Create an OpenFOAM Case from geometries.
 
     Args:
         _name: Project name.
-        _BFGeometries: List of butterfly geometries for this case.
-        refRegions_: A list of refinement regions.
-        make2dParams_: Butterfly parameters to make a 2d wind tunnel.
-        _meshParams_: Butterfly meshing parameters. You can set-up meshing parameters
-            also on the blockMesh and snappyHexMesh components to overwrite this
-            settings. Use this input to set up the meshing parameters if you are
-            not running the meshing locally.
-        expandBlockMesh_: Butterfly by default expands the mesh by one cell to
+        _BF_geo: List of butterfly geometries for this case.
+        ref_regions_: A list of refinement regions.
+        make_2d_params_: Butterfly parameters to make a 2d wind tunnel.
+        expand_block_mesh_: Butterfly by default expands the mesh by one cell to
             ensure snappyHexMesh will snap to extrior surfaces. You can set the
             expand to off or overwrite the vertices using update blockMeshDict
             component.
         _run: Create case from inputs.
     Returns:
-        readMe!: Reports, errors, warnings, etc.
-        geo: Wind tunnel geometry for visualization.
+        report: Reports, errors, warnings, etc.
+        block_pts: Points showing the corners of the wind tunnel (for visualization).
         case: Butterfly case.
 """
 
 ghenv.Component.Name = "Butterfly_Create Case from Geometries"
 ghenv.Component.NickName = "caseFromGeos"
-ghenv.Component.Message = 'VER 0.0.04\nNOV_22_2017'
+ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "00::Create"
 ghenv.Component.AdditionalHelpFromDocStrings = "2"
@@ -46,21 +42,21 @@ except ImportError as e:
     msg = '\nFailed to import butterfly:'
     raise ImportError('{}\n{}'.format(msg, e))
 
-if _run and _name and _BFGeometries:
+if _run and _name and _BF_geo:
     # meshing parameters are moved to blockMesh and snappyHexMesh components
-    _meshParams_ = None
+    _mesh_params_ = None
     
     # create OpenFoam Case
     ctm = uc.convert_document_units_to_meters()
     
-    case = Case.from_bf_geometries(_name, tuple(_BFGeometries),
-        meshing_parameters=_meshParams_, make2d_parameters=make2dParams_,
+    case = Case.from_bf_geometries(_name, tuple(_BF_geo),
+        meshing_parameters=_mesh_params_, make2d_parameters=make_2d_params_,
         convertToMeters=ctm)
     
-    for reg in refRegions_:
+    for reg in ref_regions_:
         case.add_refinement_region(reg)
     
-    if expandBlockMesh_:
+    if expand_block_mesh_:
         xCount, yCount, zCount = 1, 1, 1
         if case.blockMeshDict.is2d_in_x_direction:
             xCount = 0
@@ -71,7 +67,7 @@ if _run and _name and _BFGeometries:
         
         case.blockMeshDict.expand_by_cells_count(xCount, yCount, zCount)
     
-    blockPts = (xyz_to_point(v) for v in case.blockMeshDict.vertices)
+    block_pts = (xyz_to_point(v) for v in case.blockMeshDict.vertices)
     
     case.save(overwrite=(_run + 1) % 2)
 
