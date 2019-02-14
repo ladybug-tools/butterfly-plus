@@ -32,6 +32,7 @@ import System
 import sys
 import zipfile
 import shutil
+from distutils import dir_util
 from Grasshopper.Folders import UserObjectFolders
 
 import System
@@ -75,7 +76,7 @@ def install_butterfly(update):
         elif update and os.path.isdir(lib_folder):
             try:
                 print('Removing {}'.format(lib_folder))
-                shutil.rmtree(lib_folder)
+                dir_util.remove_tree(lib_folder)
             except:
                 print('Failed to remove {}'.format(lib_folder))
                 
@@ -105,7 +106,7 @@ def install_butterfly(update):
         bf_folder = os.path.join(target_directory, r"{}-master".format(folder), lib)
         lib_folder = os.path.join(target_directory, lib)
         print 'Copying butterfly source code from {} to {}'.format(bf_folder, lib_folder)
-        shutil.copytree(bf_folder, lib_folder)
+        dir_util.copy_tree(bf_folder, lib_folder)
 
         if count == 1:
             # copy userobjects
@@ -126,7 +127,7 @@ def install_butterfly(update):
     
         # try to clean up
         try:
-            shutil.rmtree(os.path.join(target_directory, r"{}-master".format(folder)))
+            dir_util.remove_tree(os.path.join(target_directory, r"{}-master".format(folder)))
             os.unlink(zip_file)
         except:
             pass
