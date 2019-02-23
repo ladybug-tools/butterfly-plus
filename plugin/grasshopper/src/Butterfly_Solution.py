@@ -34,7 +34,7 @@ Run recipes using OpenFOAM.
 
 ghenv.Component.Name = "Butterfly_Solution"
 ghenv.Component.NickName = "solution"
-ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
+ghenv.Component.Message = 'VER 0.0.05\nFEB_22_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "06::Solution"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -79,7 +79,7 @@ if _case and _recipe and _write:
         is_running = solution.is_running
         info = solution.info
         timestep = info.timestep
-        residual_values = info.residual_values
+        residual_values = info.residualValues
         if run_ and is_running:
             print 'running...'
             # update parameters if there has been changes.

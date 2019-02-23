@@ -28,7 +28,7 @@ snappyHexMesh
 
 ghenv.Component.Name = "Butterfly_snappyHexMesh"
 ghenv.Component.NickName = "snappyHexMesh"
-ghenv.Component.Message = 'VER 0.0.05\nJAN_12_2019'
+ghenv.Component.Message = 'VER 0.0.05\nFEB_22_2019'
 ghenv.Component.Category = "Butterfly"
 ghenv.Component.SubCategory = "03::Mesh"
 ghenv.Component.AdditionalHelpFromDocStrings = "1"
@@ -99,7 +99,9 @@ if _case and _write:
     if decompose_par_dict_:
         _case.decomposeParDict = decompose_par_dict_
         _case.decomposeParDict.save(_case.project_dir)
-    
+    else:
+        _case.decomposeParDict = None
+
     if not _case.snappyHexMeshDict.is_featureEdgeRefinement_implicit:
         sfe = SurfaceFeatureExtractDict.from_stl_file(_case.project_name,
                                                       includedAngle=150)
